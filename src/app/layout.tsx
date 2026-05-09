@@ -21,8 +21,26 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Stunova — návrhy webu",
-  description: "Vizuální směry pro značku Stunova",
+  title: {
+    default: "Libuše Stuňová · Účetnictví",
+    template: "%s · Libuše Stuňová",
+  },
+  description:
+    "Účetnictví pro malé firmy a OSVČ, kterým nestačí vidět účetní jednou ročně. Praha 4. Domluvíme si kafíčko.",
+  metadataBase: new URL("https://stunova.qawave.ai"),
+  openGraph: {
+    type: "website",
+    locale: "cs_CZ",
+    siteName: "Libuše Stuňová · Účetnictví",
+    title: "Libuše Stuňová · Účetnictví",
+    description:
+      "Účetnictví pro malé firmy a OSVČ, kterým nestačí vidět účetní jednou ročně. Praha 4.",
+    images: [{ url: "/stunova-logo.jpg", width: 1024, height: 780, alt: "Libuše Stuňová logo" }],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
