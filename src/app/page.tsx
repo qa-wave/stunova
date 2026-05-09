@@ -3,44 +3,58 @@ import Link from "next/link";
 
 const variants = [
   {
-    href: "/v1-imperial",
-    nazev: "Imperial",
-    podtitulek: "Tmavá luxusní · privátní bankovní pocit",
-    popis:
-      "Hluboké černo-zlaté pozadí, klasický serif (Playfair), pomalé fade-in animace, hairlinové zlaté oddělovače. Vhodné pro: privátní bankovnictví, advokátní kancelář, exkluzivní klub.",
-    paleta: ["#0e0c0a", "#c8a867", "#bcae93", "#f4efe6"],
-    pismo: "Playfair Display + Inter",
-    naladaClass: "bg-[#0e0c0a] text-[#c8a867]",
-  },
-  {
-    href: "/v2-editorial",
-    nazev: "Editorial",
-    podtitulek: "Magazínový luxus · oversized serif",
-    popis:
-      "Ivory pozadí, gigantické Cormorant nadpisy v italice, asymetrický 12sloupcový grid, čísla stránek, pull-quoty. Vhodné pro: značky pracující s úvahou, esejemi, intelektuálním obsahem.",
-    paleta: ["#faf7f1", "#1c1814", "#8e6f3f", "#c8a867"],
-    pismo: "Cormorant Garamond + Inter",
-    naladaClass: "bg-[#faf7f1] text-[#1c1814]",
-  },
-  {
-    href: "/v3-brutalist",
-    nazev: "Brutalist",
-    podtitulek: "Vysoký kontrast · žádný fluff",
-    popis:
-      "Čistá bílá / černá, Archivo Black v gigantické velikosti, silné rámečky, zlatý jako akcent v blocích. Vhodné pro: značky, které chtějí signalizovat „neztrácíme čas\".",
-    paleta: ["#ffffff", "#000000", "#c8a867", "#f5f5f5"],
-    pismo: "Archivo Black + Inter",
-    naladaClass: "bg-white text-black border-2 border-black",
-  },
-  {
     href: "/v4-warm",
     nazev: "Warm",
+    znacka: "Favorit",
     podtitulek: "Soft contemporary · radiální gradienty",
     popis:
-      "Krémově-zlaté radiální pozadí, Fraunces (variabilní serif), zaoblené karty s blur efektem, jemné stíny v zlaté. Vhodné pro: značky, co chtějí být prémiové, ale přístupné.",
+      "Krémově-zlaté radiální pozadí, Fraunces (variabilní serif), zaoblené karty s blur efektem, jemné stíny. Prémiové, ale přístupné — uvolněný klid s hloubkou.",
     paleta: ["#fbf5e9", "#c8a867", "#8e6f3f", "#2a1f12"],
     pismo: "Fraunces + Inter",
-    naladaClass: "bg-gradient-to-br from-[#fbf5e9] to-[#f4e6c9] text-[#2a1f12]",
+    naladaClass:
+      "bg-gradient-to-br from-[#fbf5e9] via-[#f4e6c9] to-[#e5d5b6] text-[#2a1f12]",
+    fontVar: "var(--font-fraunces)",
+    italic: false,
+  },
+  {
+    href: "/v1-aurora",
+    nazev: "Aurora",
+    znacka: "Nový směr",
+    podtitulek: "Tmavá tech-luxury · gradient mesh + glass",
+    popis:
+      "Hluboké černé pozadí s animovanými zlatými gradient blobs, glass karty s blur, Inter v tight tracking. Vibe Linear / Vercel přepsaný do zlata. Pro značky, co chtějí cítit modernost a klid současně.",
+    paleta: ["#0b0a09", "#c8a867", "#e0c890", "#bcae93"],
+    pismo: "Inter (medium tracking-tight)",
+    naladaClass:
+      "bg-[#0b0a09] text-[#f4efe6] [background:radial-gradient(ellipse_at_15%_20%,rgba(200,168,103,0.35),transparent_60%),radial-gradient(ellipse_at_85%_80%,rgba(142,111,63,0.4),transparent_60%),#0b0a09]",
+    fontVar: "var(--font-sans)",
+    italic: false,
+  },
+  {
+    href: "/v2-atelier",
+    nazev: "Atelier",
+    znacka: "Nový směr",
+    podtitulek: "Swiss minimal · hairlines + zlatá nit",
+    popis:
+      "Bílé pozadí, 12sloupcový tight grid, hairline lajny, čísla ve zlatě, sekce číslované §01-§04. Pentagram / Aesop precizí. Pro značky, které prémii dělají odčítáním, ne přidáváním.",
+    paleta: ["#ffffff", "#0e0c0a", "#c8a867", "#8e6f3f"],
+    pismo: "Inter (tracking-tight)",
+    naladaClass: "bg-white text-[#0e0c0a]",
+    fontVar: "var(--font-sans)",
+    italic: false,
+  },
+  {
+    href: "/v3-cinematic",
+    nazev: "Cinematic",
+    znacka: "Nový směr",
+    podtitulek: "Filmová dramaturgie · Akt I-III",
+    popis:
+      "Plnoplošný stage hero s vinětou, gigantický Instrument Serif, obsah strukturovaný do aktů I-III. Pro značky, které vědí, že prémie je zážitek, ne feature list.",
+    paleta: ["#1a1410", "#c8a867", "#bcae93", "#0e0a08"],
+    pismo: "Instrument Serif + Inter",
+    naladaClass: "bg-gradient-to-b from-[#0e0a08] via-[#1a1410] to-[#2a1f12] text-[#f4efe6]",
+    fontVar: "var(--font-instrument)",
+    italic: true,
   },
 ];
 
@@ -54,118 +68,90 @@ export default function Home() {
             <Image src="/logo.jpg" alt="Stunova" width={64} height={64} />
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-[#8e6f3f]">
-                Návrhy webu · interní review
+                Návrhy webu · iterace 2
               </p>
               <h1
                 className="text-4xl md:text-5xl"
-                style={{ fontFamily: "var(--font-cormorant)" }}
+                style={{ fontFamily: "var(--font-fraunces)" }}
               >
                 Stunova
               </h1>
             </div>
           </div>
           <div className="text-sm text-[#1c1814]/70 max-w-sm">
-            Čtyři vizuální směry pro značku Stunova, postavené kolem stejného
-            loga a stejné struktury obsahu. Klikni na variantu pro plný náhled.
+            Warm zůstává jako favorit. Tři nové směry pro porovnání — záměrně
+            odlišné sázky, ne malé variace na warm.
           </div>
         </div>
       </header>
 
-      {/* Brand foundation */}
-      <section className="px-6 md:px-12 py-16 border-b border-[#1c1814]/10">
-        <div className="max-w-6xl mx-auto">
-          <h2
-            className="text-3xl md:text-4xl mb-12"
-            style={{ fontFamily: "var(--font-cormorant)" }}
-          >
-            Brand foundation
-          </h2>
+      {/* Brand foundation — kompaktní */}
+      <section className="px-6 md:px-12 py-12 border-b border-[#1c1814]/10 bg-white">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12">
+          <div>
+            <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-3">
+              Pracovní positioning
+            </p>
+            <p className="text-sm leading-relaxed">
+              Prémiové poradenství pro zakladatele a majitele firem. Hodnoty:
+              <strong> síla, jasnost, diskrétnost</strong>. Tón: tichý,
+              rozvážný, bez marketingu. Tykání jako u kolegy, ke kterému máš
+              respekt.
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-12">
-            <div>
-              <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-3">
-                Pracovní positioning
-              </p>
-              <p className="text-base leading-relaxed">
-                Prémiové poradenství pro zakladatele a majitele firem. Hodnoty:
-                <strong> síla, jasnost, diskrétnost</strong>. Tón: tichý,
-                rozvážný, bez marketingu. Tykání jako u kolegy, ke kterému máš
-                respekt.
-              </p>
-              <p className="mt-3 text-xs text-[#1c1814]/60">
-                Hypotéza — upřesni a copy přepíšu napříč variantami.
-              </p>
+          <div>
+            <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-3">
+              Paleta z loga
+            </p>
+            <div className="grid grid-cols-8 gap-1">
+              {[
+                "#0e0c0a",
+                "#1c1814",
+                "#8e6f3f",
+                "#c8a867",
+                "#e0c890",
+                "#e5d5b6",
+                "#f4efe6",
+                "#faf7f1",
+              ].map((c) => (
+                <div
+                  key={c}
+                  className="aspect-square rounded border border-[#1c1814]/10"
+                  style={{ background: c }}
+                  title={c}
+                />
+              ))}
             </div>
+          </div>
 
-            <div>
-              <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-3">
-                Paleta z loga
-              </p>
-              <div className="grid grid-cols-4 gap-2">
-                {[
-                  { c: "#0e0c0a", n: "Jet" },
-                  { c: "#1c1814", n: "Graphite" },
-                  { c: "#8e6f3f", n: "Gold dark" },
-                  { c: "#c8a867", n: "Gold" },
-                  { c: "#e0c890", n: "Gold light" },
-                  { c: "#e5d5b6", n: "Sand" },
-                  { c: "#f4efe6", n: "Cream" },
-                  { c: "#faf7f1", n: "Ivory" },
-                ].map((s) => (
-                  <div key={s.c} className="text-[10px]">
-                    <div
-                      className="aspect-square rounded mb-1 border border-[#1c1814]/10"
-                      style={{ background: s.c }}
-                    />
-                    <p className="font-medium">{s.n}</p>
-                    <p className="text-[#1c1814]/60">{s.c}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-3">
-                Typografie napříč variantami
-              </p>
-              <ul className="space-y-3 text-sm">
-                <li>
-                  <span style={{ fontFamily: "var(--font-playfair)" }}>
-                    Playfair Display
-                  </span>{" "}
-                  — Imperial
-                </li>
-                <li>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-cormorant)",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    Cormorant Garamond
-                  </span>{" "}
-                  — Editorial
-                </li>
-                <li>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-archivo-black)",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    Archivo Black
-                  </span>{" "}
-                  — Brutalist
-                </li>
-                <li>
-                  <span style={{ fontFamily: "var(--font-fraunces)" }}>
-                    Fraunces
-                  </span>{" "}
-                  — Warm
-                </li>
-                <li className="text-[#1c1814]/60">Inter (body napříč všemi)</li>
-              </ul>
-            </div>
+          <div>
+            <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-3">
+              Typografie napříč variantami
+            </p>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <span style={{ fontFamily: "var(--font-fraunces)" }}>
+                  Fraunces
+                </span>{" "}
+                — Warm
+              </li>
+              <li>
+                <span style={{ fontFamily: "var(--font-sans)" }}>Inter</span> —
+                Aurora & Atelier
+              </li>
+              <li>
+                <span
+                  style={{
+                    fontFamily: "var(--font-instrument)",
+                    fontStyle: "italic",
+                  }}
+                >
+                  Instrument Serif
+                </span>{" "}
+                — Cinematic
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -178,27 +164,22 @@ export default function Home() {
               <Link
                 key={v.href}
                 href={v.href}
-                className="group block rounded-xl overflow-hidden border border-[#1c1814]/10 bg-white hover:shadow-2xl hover:-translate-y-1 transition"
+                className="group block rounded-xl overflow-hidden border border-[#1c1814]/10 bg-white hover:shadow-2xl hover:-translate-y-1 transition relative"
               >
+                {v.znacka === "Favorit" && (
+                  <span className="absolute top-4 right-4 z-10 bg-[#c8a867] text-[#2a1f12] text-[10px] tracking-widest uppercase px-3 py-1 rounded-full font-medium">
+                    Favorit
+                  </span>
+                )}
                 <div
                   className={`${v.naladaClass} aspect-[16/9] flex items-center justify-center relative overflow-hidden`}
                 >
                   <span
-                    className="text-5xl md:text-6xl"
+                    className="text-5xl md:text-6xl font-medium"
                     style={{
-                      fontFamily:
-                        v.nazev === "Imperial"
-                          ? "var(--font-playfair)"
-                          : v.nazev === "Editorial"
-                            ? "var(--font-cormorant)"
-                            : v.nazev === "Brutalist"
-                              ? "var(--font-archivo-black)"
-                              : "var(--font-fraunces)",
-                      letterSpacing:
-                        v.nazev === "Brutalist" ? "-0.04em" : "-0.02em",
-                      textTransform:
-                        v.nazev === "Brutalist" ? "uppercase" : "none",
-                      fontStyle: v.nazev === "Editorial" ? "italic" : "normal",
+                      fontFamily: v.fontVar,
+                      fontStyle: v.italic ? "italic" : "normal",
+                      letterSpacing: "-0.03em",
                     }}
                   >
                     Stunova
@@ -208,7 +189,7 @@ export default function Home() {
                   <div className="flex items-baseline justify-between mb-2">
                     <h3
                       className="text-2xl"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
+                      style={{ fontFamily: "var(--font-fraunces)" }}
                     >
                       {v.nazev}
                     </h3>
