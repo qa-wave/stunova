@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, Instrument_Serif } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
 const fraunces = Fraunces({
-  variable: "--font-fraunces",
   subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
+  display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument",
+const inter = Inter({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -26,21 +23,18 @@ export const metadata: Metadata = {
     template: "%s · Libuše Stuňová",
   },
   description:
-    "Účetnictví pro malé firmy a OSVČ, kterým nestačí vidět účetní jednou ročně. Praha 4. Domluvíme si kafíčko.",
+    "Účetní jako parťák, ne jen servis ke konci roku. Praha 4. Domluvíme si kafíčko.",
   metadataBase: new URL("https://stunova.qawave.ai"),
   openGraph: {
     type: "website",
     locale: "cs_CZ",
     siteName: "Libuše Stuňová · Účetnictví",
-    title: "Libuše Stuňová · Účetnictví",
+    title: "Libuše Stuňová · Účetnictví pro malé firmy",
     description:
-      "Účetnictví pro malé firmy a OSVČ, kterým nestačí vidět účetní jednou ročně. Praha 4.",
+      "Účetní jako parťák, ne jen servis ke konci roku. Praha 4.",
     images: [{ url: "/stunova-logo.jpg", width: 1024, height: 780, alt: "Libuše Stuňová logo" }],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -51,11 +45,9 @@ export default function RootLayout({
   return (
     <html
       lang="cs"
-      className={`${inter.variable} ${fraunces.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable}`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
