@@ -1,282 +1,263 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
-
 /* ============================================
-   Stunova brand tokens — extracted from logo
-   Gold gradient: #C8A867 (light) → #8E6F3F (dark)
+   Stunova · Warm Gold Design System
+   Paleta v oklch — referenční tokeny
    ============================================ */
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: oklch(0.971 0.022 87);
+  --color-foreground: var(--ink);
   --font-sans: var(--font-sans);
-  --font-warm: var(--font-fraunces);
-  --font-cinematic: var(--font-instrument);
-
-  --color-stunova-gold: #c8a867;
-  --color-stunova-gold-light: #e0c890;
-  --color-stunova-gold-dark: #8e6f3f;
-  --color-stunova-cream: #f4efe6;
-  --color-stunova-ivory: #faf7f1;
-  --color-stunova-sand: #e5d5b6;
-  --color-stunova-graphite: #1c1814;
-  --color-stunova-jet: #0e0c0a;
-
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
+  --font-display: var(--font-display);
 }
 
 :root {
-  --background: oklch(0.985 0.005 80);
-  --foreground: oklch(0.16 0.02 60);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0.02 60);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0.02 60);
-  --primary: oklch(0.20 0.025 60);
-  --primary-foreground: oklch(0.97 0.01 80);
-  --secondary: oklch(0.95 0.015 80);
-  --secondary-foreground: oklch(0.20 0.025 60);
-  --muted: oklch(0.95 0.01 80);
-  --muted-foreground: oklch(0.50 0.02 60);
-  --accent: oklch(0.75 0.10 80);
-  --accent-foreground: oklch(0.18 0.025 60);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.90 0.01 80);
-  --input: oklch(0.90 0.01 80);
-  --ring: oklch(0.55 0.08 75);
-  --radius: 0.625rem;
+  /* Core palette */
+  --background: oklch(0.971 0.022 87);
+  --ink: oklch(0.215 0.030 55);
+  --ink-soft: oklch(0.385 0.035 60);
+  --gold: oklch(0.762 0.094 80.5);
+  --gold-light: oklch(0.845 0.075 82);
+  --gold-dark: oklch(0.566 0.082 67.5);
+  --cream: oklch(0.955 0.025 85);
+  --sand: oklch(0.905 0.035 82);
+
+  /* Semantic */
+  --card-bg: oklch(0.985 0.012 85);
+  --ring-gold: oklch(0.762 0.094 80.5 / 0.15);
+  --shadow-gold: oklch(0.566 0.082 67.5 / 0.08);
+
+  /* Fonts */
+  --font-display: var(--font-fraunces, "Fraunces", serif);
+  --font-sans: var(--font-inter, "Inter", sans-serif);
 }
 
+/* ============================================
+   Base
+   ============================================ */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   html {
-    @apply font-sans scroll-smooth;
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
   }
+
+  body {
+    background: var(--background);
+    color: var(--ink);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 20% 10%, oklch(0.945 0.035 82 / 0.6) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 85%, oklch(0.905 0.035 82 / 0.4) 0%, transparent 60%);
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background: oklch(0.762 0.094 80.5 / 0.3);
+  }
+
   :focus-visible {
-    outline: 2px solid #c8a867;
+    outline: 2px solid var(--gold);
     outline-offset: 2px;
     border-radius: 4px;
   }
-  ::selection {
-    background: rgba(200, 168, 103, 0.3);
-  }
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
 }
 
 /* ============================================
-   Variant: Aurora — dark gradient mesh + glass
+   Typography
    ============================================ */
-.variant-aurora {
-  background-color: #0b0a09;
-  color: #f4efe6;
-  font-family: var(--font-sans);
-  position: relative;
-  overflow-x: hidden;
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-style: italic;
+  line-height: 1.1;
 }
-.variant-aurora::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(
-      ellipse 60% 50% at 15% 20%,
-      rgba(200, 168, 103, 0.35) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 50% 40% at 85% 80%,
-      rgba(142, 111, 63, 0.4) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 40% 30% at 50% 50%,
-      rgba(224, 200, 144, 0.15) 0%,
-      transparent 60%
-    );
-  pointer-events: none;
-  z-index: 0;
-  animation: auroraDrift 24s ease-in-out infinite alternate;
-}
-.variant-aurora > * {
-  position: relative;
-  z-index: 1;
-}
-@keyframes auroraDrift {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(-2%, 1%) scale(1.05);
-  }
-}
-.variant-aurora .glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
-  border: 1px solid rgba(200, 168, 103, 0.18);
-}
-.variant-aurora .gold-grad {
-  background: linear-gradient(135deg, #e0c890 0%, #c8a867 50%, #8e6f3f 100%);
+
+.gold-grad {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 /* ============================================
-   Variant: Atelier — Swiss minimal, hairlines, gold thread
+   Card & Button Components
    ============================================ */
-.variant-atelier {
-  background: #ffffff;
-  color: #0e0c0a;
-  font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
+.card-warm {
+  background: var(--card-bg);
+  border: 1px solid var(--ring-gold);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 4px 24px var(--shadow-gold),
+    0 1px 4px oklch(0 0 0 / 0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.variant-atelier .label {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #8e6f3f;
+.card-warm:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 32px var(--shadow-gold),
+    0 2px 8px oklch(0 0 0 / 0.05);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
   font-weight: 500;
+  color: var(--ink);
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+  box-shadow: 0 2px 12px oklch(0.762 0.094 80.5 / 0.3);
+  transition: all 0.2s;
 }
-.variant-atelier .num {
-  font-feature-settings: "tnum", "lnum";
-  letter-spacing: 0.02em;
-  color: #8e6f3f;
+.btn-gold:hover,
+.btn-gold-hover {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  box-shadow: 0 4px 20px oklch(0.762 0.094 80.5 / 0.4);
+  transform: translateY(-1px);
 }
-.variant-atelier .gold-rule {
-  height: 1px;
-  background: #c8a867;
+
+.btn-soft {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: var(--cream);
+  border: 1px solid oklch(0.762 0.094 80.5 / 0.2);
+  transition: all 0.2s;
 }
-.variant-atelier .hairline {
-  border-color: rgba(14, 12, 10, 0.12);
+.btn-soft:hover,
+.btn-soft-hover {
+  background: var(--sand);
+  border-color: oklch(0.762 0.094 80.5 / 0.4);
+  color: var(--ink);
 }
 
 /* ============================================
-   Variant: Cinematic — full-bleed dramatic
+   Logo & Decorative
    ============================================ */
-.variant-cinematic {
-  background: #1a1410;
-  color: #f4efe6;
-  font-family: var(--font-sans);
-  position: relative;
-  overflow-x: hidden;
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: var(--cream);
+  border: 1px solid var(--ring-gold);
 }
-.variant-cinematic .display {
-  font-family: var(--font-instrument);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 0.95;
+
+.hairline-x {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
 }
-.variant-cinematic .gold {
-  color: #c8a867;
-}
-.variant-cinematic .stage {
-  background:
-    radial-gradient(
-      ellipse 80% 60% at 50% 100%,
-      rgba(200, 168, 103, 0.25) 0%,
-      transparent 70%
-    ),
-    linear-gradient(180deg, #0e0a08 0%, #1a1410 50%, #2a1f12 100%);
-}
-.variant-cinematic .vignette::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 50%,
-    rgba(14, 10, 8, 0.7) 100%
-  );
-  pointer-events: none;
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulseDot 2s ease-in-out infinite;
 }
 
 /* ============================================
-   Variant: Warm — soft contemporary, gradient hero
+   Animations
+   ============================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.3);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.8s ease-out both;
+}
+.fade-up-1 {
+  animation: fadeUp 0.8s ease-out 0.1s both;
+}
+.fade-up-2 {
+  animation: fadeUp 0.8s ease-out 0.2s both;
+}
+.fade-up-3 {
+  animation: fadeUp 0.8s ease-out 0.3s both;
+}
+.fade-up-4 {
+  animation: fadeUp 0.8s ease-out 0.4s both;
+}
+.fade-up-5 {
+  animation: fadeUp 0.8s ease-out 0.5s both;
+}
+
+/* ============================================
+   Variant: Warm (preserved for portal/admin)
    ============================================ */
 .variant-warm {
   background:
-    radial-gradient(ellipse at 20% 10%, #f4e6c9 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 90%, #e5d5b6 0%, transparent 60%),
-    #fbf5e9;
-  color: #2a1f12;
+    radial-gradient(ellipse at 20% 10%, oklch(0.945 0.035 82 / 0.6) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 90%, oklch(0.905 0.035 82 / 0.4) 0%, transparent 60%),
+    var(--background);
+  color: var(--ink);
   font-family: var(--font-sans);
 }
 .variant-warm .display {
-  font-family: var(--font-fraunces);
+  font-family: var(--font-display);
   font-weight: 400;
   letter-spacing: -0.02em;
-  font-variation-settings: "SOFT" 50, "opsz" 144;
+  font-style: italic;
 }
 .variant-warm .gold-grad {
-  background: linear-gradient(135deg, #c8a867 0%, #8e6f3f 100%);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 /* ============================================
-   Variant: Galerie — čistá bílá v duchu loga, gallery feel
+   Variant: Galerie (preserved)
    ============================================ */
 .variant-galerie {
   background: #ffffff;
-  color: #1c1814;
+  color: var(--ink);
   font-family: var(--font-sans);
 }
 .variant-galerie .display {
-  font-family: var(--font-fraunces);
+  font-family: var(--font-display);
   font-weight: 300;
   letter-spacing: -0.025em;
-  font-variation-settings: "SOFT" 60, "opsz" 144;
+  font-style: italic;
 }
 .variant-galerie .label {
   font-size: 10px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #8e6f3f;
-}
-.variant-galerie .gold {
-  color: #8e6f3f;
+  color: var(--gold-dark);
 }
 .variant-galerie .hairline {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    #c8a867 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
   height: 1px;
 }
 .variant-galerie .dot {
@@ -284,28 +265,5 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #c8a867;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.fade-up {
-  animation: fadeUp 0.9s ease-out both;
-}
-.fade-up-delay-1 {
-  animation: fadeUp 0.9s ease-out 0.15s both;
-}
-.fade-up-delay-2 {
-  animation: fadeUp 0.9s ease-out 0.3s both;
-}
-.fade-up-delay-3 {
-  animation: fadeUp 0.9s ease-out 0.45s both;
+  background: var(--gold);
 }
