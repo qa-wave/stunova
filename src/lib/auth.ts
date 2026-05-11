@@ -1,19 +1,16 @@
 /**
- * Auth scaffold — Clerk integration
+ * Auth config — Clerk integration (ACTIVE)
  *
- * To enable:
- * 1. Install: npm i @clerk/nextjs
- * 2. Add env vars: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY
- * 3. Uncomment ClerkProvider in layout.tsx
- * 4. Uncomment middleware.ts
- * 5. Update login form in prihlaseni/page.tsx to use Clerk's <SignIn />
+ * Required env vars:
+ *   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+ *   CLERK_SECRET_KEY=sk_test_...
  *
- * Public routes (no auth): /, /v4-warm, /v5-galerie, /prihlaseni, /api/health
- * Protected routes: /portal/*, /admin/*
+ * Optional:
+ *   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/prihlaseni
+ *   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/portal
  */
 
-// Placeholder — replace with actual Clerk imports when installed
-export const AUTH_ENABLED = false;
+export const AUTH_ENABLED = true;
 
 export const publicRoutes = [
   "/",
@@ -25,6 +22,7 @@ export const publicRoutes = [
   "/robots.txt",
 ];
 
+/** Emails that can access /admin/* */
 export const adminEmails = [
   "libuse@stunova.cz",
 ];

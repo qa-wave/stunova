@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
+import { csCZ } from "@clerk/localizations";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -50,7 +52,21 @@ export default function RootLayout({
       lang="cs"
       className={`${fraunces.variable} ${inter.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <ClerkProvider
+          localization={csCZ}
+          appearance={{
+            variables: {
+              colorPrimary: "oklch(0.566 0.082 67.5)",
+              colorTextOnPrimaryBackground: "oklch(0.971 0.022 87)",
+              borderRadius: "0.75rem",
+              fontFamily: "var(--font-inter), sans-serif",
+            },
+          }}
+        >
+          {children}
+        </ClerkProvider>
+      </body>
     </html>
   );
 }

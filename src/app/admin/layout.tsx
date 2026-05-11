@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useUser, UserButton, SignOutButton } from "@clerk/nextjs";
 import { Logo } from "@/components/Logo";
 import { LayoutDashboard, Users, Calendar, Receipt, LogOut } from "lucide-react";
 
@@ -18,9 +19,12 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const { user } = useUser();
 
   const isActive = (href: string) =>
     href === "/admin" ? pathname === "/admin" : pathname.startsWith(href);
+
+  const displayName = user?.firstName || "Libuše";
 
   return (
     <div className="variant-warm min-h-screen flex">
@@ -56,22 +60,27 @@ export default function AdminLayout({
 
         <div className="p-4 border-t border-[var(--gold)]/30">
           <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--gold)]/5">
-            <div className="size-9 rounded-full flex items-center justify-center text-[var(--ink)] text-sm font-medium bg-[var(--gold-light)]">
-              LS
-            </div>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "size-9",
+                },
+              }}
+            />
             <div className="flex-1 min-w-0">
-              <p className="text-sm truncate">Libuše Stuňová</p>
+              <p className="text-sm truncate">{displayName}</p>
               <p className="text-[10px] text-[var(--gold)] truncate">
-                Účetní · majitelka
+                Účetní · admin
               </p>
             </div>
-            <Link
-              href="/prihlaseni"
-              className="text-[var(--gold)] hover:text-[var(--cream)] transition"
-              title="Odhlásit"
-            >
-              <LogOut className="w-4 h-4" />
-            </Link>
+            <SignOutButton redirectUrl="/prihlaseni">
+              <button
+                className="text-[var(--gold)] hover:text-[var(--cream)] transition"
+                title="Odhlásit"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </SignOutButton>
           </div>
         </div>
       </aside>
@@ -81,9 +90,14 @@ export default function AdminLayout({
           <Link href="/admin">
             <Logo size="xs" tone="light" />
           </Link>
-          <Link href="/prihlaseni" className="flex items-center gap-1.5 text-xs text-[var(--gold)]">
-            <LogOut className="w-3.5 h-3.5" /> Odhlásit
-          </Link>
+          <div className="flex items-center gap-3">
+            <UserButton appearance={{ elements: { avatarBox: "size-7" } }} />
+            <SignOutButton redirectUrl="/prihlaseni">
+              <button className="flex items-center gap-1.5 text-xs text-[var(--gold)]">
+                <LogOut className="w-3.5 h-3.5" /> Odhlásit
+              </button>
+            </SignOutButton>
+          </div>
         </div>
 
         <div className="flex-1 p-6 md:p-10 pb-24 md:pb-10">{children}</div>
