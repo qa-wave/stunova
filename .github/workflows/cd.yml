@@ -29,9 +29,10 @@ jobs:
 
       - name: Deployment summary
         run: |
-          echo "## 🚀 Deployment úspěšný" >> $GITHUB_STEP_SUMMARY
+          echo "## Deployment úspěšný" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**URL:** ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** https://stunova.qawave.ai" >> $GITHUB_STEP_SUMMARY
+          echo "**Deploy URL:** ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
 
   healthcheck:
@@ -44,10 +45,10 @@ jobs:
 
       - name: Check health endpoint
         run: |
-          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "${{ needs.deploy-vercel.outputs.url }}" || echo "000")
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://stunova.qawave.ai/api/health" || echo "000")
           if [ "$HTTP_CODE" = "200" ]; then
-            echo "✅ Deployment is healthy (HTTP $HTTP_CODE)"
+            echo "Deployment is healthy (HTTP $HTTP_CODE)"
           else
-            echo "⚠️ Deployment returned HTTP $HTTP_CODE"
+            echo "Deployment returned HTTP $HTTP_CODE"
             exit 1
           fi

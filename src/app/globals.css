@@ -277,3 +277,55 @@
   border-radius: 50%;
   background: var(--gold);
 }
+
+/* ============================================
+   Print styles — faktury
+   ============================================ */
+@media print {
+  body,
+  body::before {
+    background: white !important;
+  }
+
+  nav,
+  aside,
+  .btn-gold,
+  .btn-soft,
+  footer,
+  [aria-label*="mobilní"] {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  .card-warm,
+  .bg-white\/70 {
+    background: white !important;
+    box-shadow: none !important;
+    border-color: #ddd !important;
+  }
+
+  table {
+    font-size: 11px !important;
+  }
+
+  .display {
+    font-style: normal !important;
+  }
+
+  .gold-grad {
+    background: none !important;
+    color: var(--ink) !important;
+    -webkit-text-fill-color: var(--ink) !important;
+  }
+
+  a[href]::after {
+    content: none !important;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}
