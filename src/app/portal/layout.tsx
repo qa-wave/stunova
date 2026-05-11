@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/Logo";
+import { LayoutDashboard, FileText, Receipt, Calendar, LogOut } from "lucide-react";
 
 const navItems = [
-  { href: "/portal", label: "Přehled", icon: "◐" },
-  { href: "/portal/dokumenty", label: "Dokumenty", icon: "◑" },
-  { href: "/portal/faktury", label: "Faktury", icon: "◒" },
-  { href: "/portal/schuzky", label: "Schůzky", icon: "◓" },
+  { href: "/portal", label: "Přehled", icon: LayoutDashboard },
+  { href: "/portal/dokumenty", label: "Dokumenty", icon: FileText },
+  { href: "/portal/faktury", label: "Faktury", icon: Receipt },
+  { href: "/portal/schuzky", label: "Schůzky", icon: Calendar },
 ];
 
 export default function PortalLayout({
@@ -23,12 +24,12 @@ export default function PortalLayout({
 
   return (
     <div className="variant-warm min-h-screen flex">
-      <aside className="hidden md:flex w-64 flex-col border-r border-[#c8a867]/20 bg-white/40 backdrop-blur-xl">
-        <div className="p-6 border-b border-[#c8a867]/20">
+      <aside className="hidden md:flex w-64 flex-col border-r border-[var(--gold)]/20 bg-[var(--card-bg)]/40 backdrop-blur-xl">
+        <div className="p-6 border-b border-[var(--gold)]/20">
           <Link href="/">
             <Logo size="md" />
           </Link>
-          <p className="text-[10px] uppercase tracking-widest text-[#8e6f3f] mt-3">
+          <p className="text-[10px] uppercase tracking-widest text-[var(--gold-dark)] mt-3">
             Klientský portál
           </p>
         </div>
@@ -39,55 +40,49 @@ export default function PortalLayout({
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c8a867] ${
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition ${
                 isActive(item.href)
-                  ? "bg-white/90 text-[#2a1f12] font-medium shadow-sm"
-                  : "text-[#2a1f12] hover:bg-white/70"
+                  ? "bg-[var(--card-bg)] text-[var(--ink)] font-medium shadow-sm"
+                  : "text-[var(--ink)] hover:bg-[var(--card-bg)]/70"
               }`}
             >
-              <span className={isActive(item.href) ? "text-[#c8a867]" : "text-[#8e6f3f]"}>
-                {item.icon}
-              </span>
+              <item.icon
+                className={`w-4 h-4 ${isActive(item.href) ? "text-[var(--gold)]" : "text-[var(--gold-dark)]"}`}
+              />
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="p-4 border-t border-[#c8a867]/20">
-          <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/60 backdrop-blur-sm">
-            <div
-              className="size-9 rounded-full flex items-center justify-center text-white text-sm font-medium"
-              style={{
-                background:
-                  "linear-gradient(135deg, #c8a867 0%, #5a3825 100%)",
-              }}
-            >
+        <div className="p-4 border-t border-[var(--gold)]/20">
+          <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--card-bg)]/60 backdrop-blur-sm">
+            <div className="size-9 rounded-full flex items-center justify-center text-sm font-medium bg-[var(--gold)] text-[var(--ink)]">
               JN
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm truncate">Jan Novák</p>
-              <p className="text-[10px] text-[#8e6f3f] truncate">
+              <p className="text-[10px] text-[var(--gold-dark)] truncate">
                 Acme s.r.o.
               </p>
             </div>
             <Link
               href="/prihlaseni"
-              className="text-xs text-[#8e6f3f] hover:text-[#2a1f12] focus-visible:outline-2 focus-visible:outline-[#c8a867]"
+              className="text-[var(--gold-dark)] hover:text-[var(--ink)] transition"
               title="Odhlásit"
             >
-              ↗
+              <LogOut className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </aside>
 
       <main className="flex-1 min-w-0 flex flex-col">
-        <div className="md:hidden flex items-center justify-between px-4 py-4 border-b border-[#c8a867]/20 bg-white/60 backdrop-blur-xl">
+        <div className="md:hidden flex items-center justify-between px-4 py-4 border-b border-[var(--gold)]/20 bg-[var(--card-bg)]/60 backdrop-blur-xl">
           <Link href="/portal">
             <Logo size="xs" />
           </Link>
-          <Link href="/prihlaseni" className="text-xs text-[#8e6f3f]">
-            Odhlásit
+          <Link href="/prihlaseni" className="flex items-center gap-1.5 text-xs text-[var(--gold-dark)]">
+            <LogOut className="w-3.5 h-3.5" /> Odhlásit
           </Link>
         </div>
 
@@ -96,7 +91,8 @@ export default function PortalLayout({
         {/* Mobile bottom nav */}
         <nav
           aria-label="Portál mobilní"
-          className="md:hidden fixed bottom-0 inset-x-0 bg-white/90 backdrop-blur-xl border-t border-[#c8a867]/20 flex z-50"
+          className="md:hidden fixed bottom-0 inset-x-0 bg-[var(--card-bg)]/90 backdrop-blur-xl border-t border-[var(--gold)]/20 flex z-50"
+          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
         >
           {navItems.map((item) => (
             <Link
@@ -105,13 +101,13 @@ export default function PortalLayout({
               aria-current={isActive(item.href) ? "page" : undefined}
               className={`flex-1 flex flex-col items-center gap-1 py-3 text-[10px] transition ${
                 isActive(item.href)
-                  ? "text-[#2a1f12] font-medium"
-                  : "text-[#8e6f3f]"
+                  ? "text-[var(--ink)] font-medium"
+                  : "text-[var(--gold-dark)]"
               }`}
             >
-              <span className={`text-lg ${isActive(item.href) ? "text-[#c8a867]" : ""}`}>
-                {item.icon}
-              </span>
+              <item.icon
+                className={`w-5 h-5 ${isActive(item.href) ? "text-[var(--gold)]" : ""}`}
+              />
               {item.label}
             </Link>
           ))}

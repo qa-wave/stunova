@@ -46,11 +46,19 @@
   body {
     background: var(--background);
     color: var(--ink);
-    background-image:
+    min-height: 100dvh;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
       radial-gradient(ellipse 80% 60% at 20% 10%, oklch(0.945 0.035 82 / 0.6) 0%, transparent 60%),
       radial-gradient(ellipse 60% 50% at 85% 85%, oklch(0.905 0.035 82 / 0.4) 0%, transparent 60%);
-    background-attachment: fixed;
-    min-height: 100dvh;
   }
 
   ::selection {
@@ -94,11 +102,13 @@
     0 1px 4px oklch(0 0 0 / 0.03);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.card-warm:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 8px 32px var(--shadow-gold),
-    0 2px 8px oklch(0 0 0 / 0.05);
+@media (hover: hover) {
+  .card-warm:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 32px var(--shadow-gold),
+      0 2px 8px oklch(0 0 0 / 0.05);
+  }
 }
 
 .btn-gold {

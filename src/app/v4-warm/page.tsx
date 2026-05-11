@@ -21,7 +21,7 @@ export default function WarmVariant() {
         <Link href="/">
           <Logo size="md" />
         </Link>
-        <div className="hidden md:flex items-center gap-2 bg-white/60 backdrop-blur-md border border-[#c8a867]/30 rounded-full px-2 py-1.5 shadow-sm">
+        <div className="hidden md:flex items-center gap-2 bg-[var(--card-bg)]/60 backdrop-blur-md border border-[var(--gold)]/20 rounded-full px-2 py-1.5 shadow-sm">
           {[
             ["Služby", "#sluzby"],
             ["Jak to chodí", "#proces"],
@@ -31,76 +31,60 @@ export default function WarmVariant() {
             <a
               key={h}
               href={h}
-              className="px-4 py-1.5 text-sm rounded-full hover:bg-white transition"
+              className="px-4 py-1.5 text-sm rounded-full hover:bg-[var(--card-bg)] transition"
             >
               {t}
             </a>
           ))}
         </div>
-        <Link
-          href="#kontakt"
-          className="rounded-full px-6 py-3 text-sm font-medium text-white shadow-lg shadow-[#c8a867]/30 transition hover:shadow-[#c8a867]/50"
-          style={{
-            background: "linear-gradient(135deg, #c8a867 0%, #8e6f3f 100%)",
-          }}
-        >
+        <Link href="#kontakt" className="btn-gold">
           Pojďme na kafe →
         </Link>
       </nav>
 
       {/* Hero */}
-      <section className="flex-1 px-6 md:px-12 py-16 md:py-20">
+      <section className="flex-1 px-6 md:px-12 py-16 md:py-20 scroll-mt-24">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-[#c8a867]/30 rounded-full px-4 py-2 mb-8 fade-up">
-              <span className="size-2 rounded-full bg-[#5a3825] animate-pulse" />
+            <div className="inline-flex items-center gap-2 bg-[var(--card-bg)]/70 backdrop-blur-sm border border-[var(--gold)]/20 rounded-full px-4 py-2 mb-8">
+              <span className="pulse-dot" />
               <span className="text-xs tracking-wide">
                 Beru nové klienty od ledna 2026
               </span>
             </div>
-            <h1 className="display fade-up-delay-1 text-5xl md:text-7xl leading-[1.05] mb-8">
+            <h1 className="display text-5xl md:text-7xl leading-[1.05] mb-8">
               Účetnictví,
               <br />
-              <span className="gold-grad italic">co tě nestresuje.</span>
+              <span className="gold-grad">co tě nestresuje.</span>
             </h1>
-            <p className="fade-up-delay-2 text-lg md:text-xl text-[#5a4a32] leading-relaxed mb-10 max-w-xl">
+            <p className="text-lg md:text-xl text-[var(--ink-soft)] leading-relaxed mb-10 max-w-xl">
               Pro malé firmy a OSVČ, kterým nevyhovuje, když je účetní vidí
               jen jednou ročně. Sednem si nad kávou, projdem si to spolu
               a celý rok víš, jak na tom jsi.
             </p>
-            <div className="fade-up-delay-3 flex flex-wrap gap-4">
-              <Link
-                href="#kontakt"
-                className="rounded-full px-7 py-4 text-white shadow-lg shadow-[#c8a867]/30 transition hover:shadow-[#c8a867]/50"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #c8a867 0%, #8e6f3f 100%)",
-                }}
-              >
+            <div className="flex flex-wrap gap-4">
+              <Link href="#kontakt" className="btn-gold">
                 Domluvíme si kafíčko
               </Link>
-              <Link
-                href="#sluzby"
-                className="rounded-full px-7 py-4 bg-white/60 backdrop-blur border border-[#c8a867]/30 hover:bg-white transition"
-              >
+              <Link href="#sluzby" className="btn-soft">
                 Co všechno řeším
               </Link>
             </div>
           </div>
 
-          <div className="fade-up-delay-3 relative">
+          <div className="relative">
             <div
-              className="absolute inset-0 -m-8 rounded-[3rem] blur-3xl opacity-50"
+              className="absolute inset-0 -m-8 rounded-[3rem] blur-3xl opacity-50 pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle, #c8a867 0%, transparent 70%)",
+                  "radial-gradient(circle, var(--gold) 0%, transparent 70%)",
               }}
             />
-            <div className="relative bg-white/70 backdrop-blur-xl border border-white rounded-[2.5rem] p-10 shadow-2xl shadow-[#c8a867]/20">
+            <div className="relative card-warm p-10 rounded-[2.5rem]">
               <div className="flex justify-center">
                 <LogoHero width={300} />
               </div>
-              <div className="mt-8 pt-8 border-t border-[#c8a867]/20 grid grid-cols-3 text-center gap-4">
+              <div className="mt-8 pt-8 border-t border-[var(--gold)]/20 grid grid-cols-3 text-center gap-4">
                 {[
                   { c: "14+", l: "let praxe" },
                   { c: "62", l: "spokojených klientů" },
@@ -108,7 +92,9 @@ export default function WarmVariant() {
                 ].map((s) => (
                   <div key={s.l}>
                     <p className="display text-3xl gold-grad">{s.c}</p>
-                    <p className="text-xs text-[#5a4a32] mt-1">{s.l}</p>
+                    <p className="text-xs text-[var(--ink-soft)] mt-1">
+                      {s.l}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -117,8 +103,8 @@ export default function WarmVariant() {
         </div>
       </section>
 
-      {/* Sluzby */}
-      <section id="sluzby" className="px-6 md:px-12 py-24">
+      {/* Služby */}
+      <section id="sluzby" className="px-6 md:px-12 py-24 scroll-mt-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-sm font-medium gold-grad mb-4 tracking-wide">
@@ -149,13 +135,12 @@ export default function WarmVariant() {
                 cena: "od 350 Kč / zam.",
               },
             ].map((s) => (
-              <div
-                key={s.t}
-                className="bg-white/70 backdrop-blur-xl rounded-3xl p-8 border border-white shadow-xl shadow-[#c8a867]/10 hover:-translate-y-1 transition"
-              >
+              <div key={s.t} className="card-warm p-8">
                 <div className="text-4xl mb-6">{s.emoji}</div>
                 <h3 className="display text-2xl mb-3">{s.t}</h3>
-                <p className="text-[#5a4a32] leading-relaxed mb-6">{s.d}</p>
+                <p className="text-[var(--ink-soft)] leading-relaxed mb-6">
+                  {s.d}
+                </p>
                 <p className="text-sm gold-grad font-medium">{s.cena}</p>
               </div>
             ))}
@@ -164,7 +149,7 @@ export default function WarmVariant() {
       </section>
 
       {/* Jak to chodí */}
-      <section id="proces" className="px-6 md:px-12 py-24">
+      <section id="proces" className="px-6 md:px-12 py-24 scroll-mt-24">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-sm font-medium gold-grad mb-4 tracking-wide">
@@ -200,7 +185,7 @@ export default function WarmVariant() {
               <div key={p.n} className="relative">
                 <div className="display text-5xl gold-grad mb-3">{p.n}</div>
                 <h3 className="display text-xl mb-2">{p.t}</h3>
-                <p className="text-sm text-[#5a4a32] leading-relaxed">
+                <p className="text-sm text-[var(--ink-soft)] leading-relaxed">
                   {p.d}
                 </p>
               </div>
@@ -210,20 +195,20 @@ export default function WarmVariant() {
       </section>
 
       {/* O mně */}
-      <section id="o-mne" className="px-6 md:px-12 py-24">
-        <div className="max-w-4xl mx-auto bg-white/70 backdrop-blur-xl rounded-[2.5rem] p-12 md:p-16 border border-white shadow-xl shadow-[#c8a867]/10">
+      <section id="o-mne" className="px-6 md:px-12 py-24 scroll-mt-24">
+        <div className="max-w-4xl mx-auto card-warm p-12 md:p-16 rounded-[2.5rem]">
           <div className="grid md:grid-cols-3 gap-10 items-start">
             <div className="md:col-span-1">
               <div
                 className="aspect-square rounded-3xl flex items-center justify-center text-5xl"
                 style={{
                   background:
-                    "linear-gradient(135deg, #f4ead4 0%, #e8dcb8 100%)",
+                    "linear-gradient(135deg, var(--cream) 0%, var(--sand) 100%)",
                 }}
               >
                 ☕
               </div>
-              <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mt-4 text-center">
+              <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mt-4 text-center">
                 Libuše Stuňová
               </p>
             </div>
@@ -235,12 +220,12 @@ export default function WarmVariant() {
                 Účetní, která vysvětluje<br />
                 <em>i třikrát</em>, dokud nedává smysl.
               </h2>
-              <p className="text-[#5a4a32] leading-relaxed mb-4">
+              <p className="text-[var(--ink-soft)] leading-relaxed mb-4">
                 Účetnictví dělám 14 let — z toho 9 sama pro malé firmy a OSVČ.
                 Vystudovala jsem VŠE, mám platnou daňovou licenci a každý rok
                 aspoň 40 hodin školení, aby mi neuteklo, co stát zase změnil.
               </p>
-              <p className="text-[#5a4a32] leading-relaxed">
+              <p className="text-[var(--ink-soft)] leading-relaxed">
                 Co mě baví: když po pár měsících klient přestane stresovat
                 z papírů a začne přemýšlet o tom, co fakt umí. To je smysl
                 téhle práce.
@@ -251,37 +236,37 @@ export default function WarmVariant() {
       </section>
 
       {/* CTA */}
-      <section id="kontakt" className="px-6 md:px-12 py-24">
+      <section id="kontakt" className="px-6 md:px-12 py-24 scroll-mt-24">
         <div
-          className="max-w-4xl mx-auto rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden"
+          className="max-w-4xl mx-auto rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden"
           style={{
             background:
-              "linear-gradient(135deg, #2a1f12 0%, #5a3825 50%, #8e6f3f 100%)",
+              "linear-gradient(135deg, var(--ink) 0%, oklch(0.35 0.04 55) 50%, var(--gold-dark) 100%)",
           }}
         >
           <div
-            className="absolute inset-0 opacity-30"
+            className="absolute inset-0 opacity-30 pointer-events-none"
             style={{
               background:
-                "radial-gradient(circle at 30% 20%, #c8a867 0%, transparent 50%)",
+                "radial-gradient(circle at 30% 20%, var(--gold) 0%, transparent 50%)",
             }}
           />
           <div className="relative">
             <div className="text-5xl mb-6">☕</div>
-            <h2 className="display text-4xl md:text-6xl mb-6">
+            <h2 className="display text-4xl md:text-6xl mb-6 text-[var(--cream)]">
               Tak co, dáme to kafíčko?
             </h2>
-            <p className="text-lg text-[#e0c890] mb-10 max-w-xl mx-auto">
+            <p className="text-lg text-[var(--gold-light)] mb-10 max-w-xl mx-auto">
               Půl hoďky, online nebo v Praze 4, zdarma. Bez závazku.
               Když si nepadnem do oka, doporučím ti někoho jiného.
             </p>
             <a
               href="mailto:libuse@stunova.cz"
-              className="inline-block bg-[#c8a867] text-[#2a1f12] rounded-full px-10 py-5 font-medium shadow-2xl hover:bg-[#e0c890] transition"
+              className="inline-block bg-[var(--gold)] text-[var(--ink)] rounded-full px-10 py-5 font-medium shadow-2xl hover:bg-[var(--gold-light)] transition"
             >
               libuse@stunova.cz
             </a>
-            <p className="text-xs text-[#bcae93] mt-6">
+            <p className="text-xs text-[var(--sand)] mt-6">
               nebo zavolej · +420 728 ••• ••• · po-pá 9–17
             </p>
           </div>
@@ -289,9 +274,9 @@ export default function WarmVariant() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 md:px-12 py-8 flex justify-between items-center text-sm text-[#5a4a32]">
+      <footer className="px-6 md:px-12 py-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-[var(--ink-soft)]">
         <span>© Libuše Stuňová · Účetnictví · {new Date().getFullYear()}</span>
-        <span className="display italic">Variant · Warm</span>
+        <span className="display">Variant · Warm</span>
       </footer>
     </div>
   );

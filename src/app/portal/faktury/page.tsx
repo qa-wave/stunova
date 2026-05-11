@@ -41,15 +41,15 @@ const faktury = [
 ];
 
 const stavStyl = {
-  k_uhrade: "bg-[#c8a867]/20 text-[#8e6f3f] border-[#c8a867]/40",
-  uhrazeno: "bg-white/80 text-[#5a4a32] border-[#c8a867]/20",
+  k_uhrade: "bg-[var(--gold)]/20 text-[var(--gold-dark)] border-[var(--gold)]/40",
+  uhrazeno: "bg-white/80 text-[var(--ink-soft)] border-[var(--gold)]/20",
 };
 
 export default function PortalFaktury() {
   return (
     <div className="max-w-5xl">
       <div className="mb-8">
-        <p className="text-xs uppercase tracking-[0.3em] text-[#8e6f3f] mb-3">
+        <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
           Faktury od Libuše · za účetní služby
         </p>
         <h1 className="display text-4xl md:text-5xl">Faktury</h1>
@@ -58,33 +58,33 @@ export default function PortalFaktury() {
       {/* Summary */}
       <div className="grid md:grid-cols-3 gap-4 mb-8">
         <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6">
-          <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
             K úhradě
           </p>
           <p className="display text-3xl gold-grad">5 800 Kč</p>
-          <p className="text-xs text-[#5a4a32] mt-1">Splatnost 14. 5.</p>
+          <p className="text-xs text-[var(--ink-soft)] mt-1">Splatnost 14. 5.</p>
         </div>
         <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6">
-          <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
             Letos uhrazeno
           </p>
           <p className="display text-3xl">25 200 Kč</p>
-          <p className="text-xs text-[#5a4a32] mt-1">4 faktury</p>
+          <p className="text-xs text-[var(--ink-soft)] mt-1">4 faktury</p>
         </div>
         <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6">
-          <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
             Předplatné
           </p>
           <p className="display text-3xl">5 800 Kč</p>
-          <p className="text-xs text-[#5a4a32] mt-1">měsíčně · vč. DPH</p>
+          <p className="text-xs text-[var(--ink-soft)] mt-1">měsíčně · vč. DPH</p>
         </div>
       </div>
 
       {/* Table */}
-      <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl overflow-hidden shadow-md shadow-[#c8a867]/5">
+      <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl overflow-hidden shadow-md shadow-[var(--gold)]/5">
         <div className="overflow-x-auto">
         <table className="w-full text-sm min-w-[640px]">
-          <thead className="text-[10px] uppercase tracking-widest text-[#8e6f3f] border-b border-[#c8a867]/20">
+          <thead className="text-[10px] uppercase tracking-widest text-[var(--gold-dark)] border-b border-[var(--gold)]/20">
             <tr>
               <th className="text-left px-6 py-4">Číslo</th>
               <th className="text-left px-6 py-4">Vystaveno</th>
@@ -98,10 +98,10 @@ export default function PortalFaktury() {
             {faktury.map((f) => (
               <tr
                 key={f.cislo}
-                className="border-b border-[#c8a867]/10 last:border-0 hover:bg-white/50 transition"
+                className="border-b border-[var(--gold)]/10 last:border-0 hover:bg-white/50 transition"
               >
                 <td className="px-6 py-4 font-medium">{f.cislo}</td>
-                <td className="px-6 py-4 text-[#5a4a32]">{f.datum}</td>
+                <td className="px-6 py-4 text-[var(--ink-soft)]">{f.datum}</td>
                 <td className="px-6 py-4">{f.polozka}</td>
                 <td className="px-6 py-4 text-right">{f.castka}</td>
                 <td className="px-6 py-4">
@@ -114,7 +114,7 @@ export default function PortalFaktury() {
                 <td className="px-6 py-4 text-right">
                   <a
                     href="#"
-                    className="text-[#8e6f3f] hover:text-[#2a1f12] text-xs"
+                    className="text-[var(--gold-dark)] hover:text-[var(--ink)] text-xs"
                   >
                     Stáhnout
                   </a>

@@ -31,7 +31,7 @@ export function Logo({
   if (tone === "light") {
     return (
       <span
-        className={`inline-flex bg-[#f4ead4] rounded-xl p-2 ${className}`}
+        className={`inline-flex bg-[var(--cream)] rounded-xl p-2 ${className}`}
       >
         <Image
           src={LOGO_SRC}

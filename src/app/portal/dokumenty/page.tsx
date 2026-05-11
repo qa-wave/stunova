@@ -76,7 +76,7 @@ export default function PortalDokumenty() {
     <div className="max-w-5xl">
       <div className="flex items-baseline justify-between mb-8 flex-wrap gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-[#8e6f3f] mb-3">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
             Tvoje účetní složka
           </p>
           <h1 className="display text-4xl md:text-5xl">Dokumenty</h1>
@@ -87,10 +87,10 @@ export default function PortalDokumenty() {
               key={f}
               onClick={() => setAktivniFiltr(f)}
               aria-pressed={aktivniFiltr === f}
-              className={`px-4 py-2 text-xs rounded-full transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c8a867] ${
+              className={`px-4 py-2 text-xs rounded-full transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] ${
                 aktivniFiltr === f
-                  ? "bg-[#5a3825] text-white"
-                  : "bg-white/80 border border-[#c8a867]/30 hover:bg-white"
+                  ? "bg-[var(--ink)] text-white"
+                  : "bg-white/80 border border-[var(--gold)]/30 hover:bg-white"
               }`}
             >
               {f}
@@ -101,7 +101,7 @@ export default function PortalDokumenty() {
 
       <div className="grid md:grid-cols-2 gap-4">
         {filtrovaneDokumenty.length === 0 ? (
-          <p className="text-sm text-[#5a4a32]/60 italic col-span-2 py-8 text-center">
+          <p className="text-sm text-[var(--ink-soft)]/60 italic col-span-2 py-8 text-center">
             Žádné dokumenty v této kategorii.
           </p>
         ) : (
@@ -109,21 +109,21 @@ export default function PortalDokumenty() {
             <Link
               key={m.t}
               href="#"
-              className="group bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6 shadow-md shadow-[#c8a867]/5 hover:-translate-y-0.5 hover:shadow-xl transition relative focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c8a867]"
+              className="group bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6 shadow-md shadow-[var(--gold)]/5 hover:-translate-y-0.5 hover:shadow-xl transition relative focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
             >
               {m.novy && (
-                <span className="absolute top-4 right-4 size-2 rounded-full bg-[#c8a867]" aria-label="Nový dokument" />
+                <span className="absolute top-4 right-4 size-2 rounded-full bg-[var(--gold)]" aria-label="Nový dokument" />
               )}
-              <p className="text-[10px] uppercase tracking-widest text-[#8e6f3f] mb-3">
+              <p className="text-[10px] uppercase tracking-widest text-[var(--gold-dark)] mb-3">
                 {m.typ}
               </p>
               <h3 className="display text-xl mb-2 group-hover:gold-grad transition">
                 {m.t}
               </h3>
-              <p className="text-sm text-[#5a4a32] mb-4 leading-relaxed">
+              <p className="text-sm text-[var(--ink-soft)] mb-4 leading-relaxed">
                 {m.pop}
               </p>
-              <div className="flex items-center justify-between text-xs text-[#8e6f3f]">
+              <div className="flex items-center justify-between text-xs text-[var(--gold-dark)]">
                 <span>{m.aut}</span>
                 <span>{m.cas}</span>
               </div>

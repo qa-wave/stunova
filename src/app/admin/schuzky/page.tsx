@@ -80,19 +80,19 @@ export default function AdminSchuzky() {
     <div className="max-w-5xl">
       <div className="flex items-baseline justify-between mb-8 flex-wrap gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-[#8e6f3f] mb-3">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
             Týdenní výhled · 8 kafíček ☕
           </p>
           <h1 className="display text-4xl md:text-5xl">Kalendář</h1>
         </div>
         <div className="flex gap-2">
-          <button className="rounded-full px-4 py-2 text-xs bg-white/80 border border-[#c8a867]/30 hover:bg-white">
+          <button className="rounded-full px-4 py-2 text-xs bg-white/80 border border-[var(--gold)]/30 hover:bg-white">
             ← Min týden
           </button>
-          <button className="rounded-full px-4 py-2 text-xs bg-[#5a3825] text-white">
+          <button className="rounded-full px-4 py-2 text-xs bg-[var(--ink)] text-white">
             Tento týden
           </button>
-          <button className="rounded-full px-4 py-2 text-xs bg-white/80 border border-[#c8a867]/30 hover:bg-white">
+          <button className="rounded-full px-4 py-2 text-xs bg-white/80 border border-[var(--gold)]/30 hover:bg-white">
             Příští →
           </button>
         </div>
@@ -102,18 +102,18 @@ export default function AdminSchuzky() {
         {dny.map((d) => (
           <div
             key={d.datum}
-            className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6 shadow-md shadow-[#c8a867]/5"
+            className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6 shadow-md shadow-[var(--gold)]/5"
           >
             <div className="flex items-baseline justify-between mb-4">
               <h3 className="display text-xl">{d.datum}</h3>
-              <span className="text-xs text-[#8e6f3f]">
+              <span className="text-xs text-[var(--gold-dark)]">
                 {d.sezeni.length === 0
                   ? "Volný den"
                   : `${d.sezeni.length} schůzky`}
               </span>
             </div>
             {d.sezeni.length === 0 ? (
-              <p className="text-sm text-[#5a4a32]/60 italic">
+              <p className="text-sm text-[var(--ink-soft)]/60 italic">
                 Žádné kafíčko naplánované.
               </p>
             ) : (
@@ -125,18 +125,18 @@ export default function AdminSchuzky() {
                   >
                     <div className="md:col-span-2 flex items-center gap-2">
                       <span className="display text-lg">{s.cas}</span>
-                      <span className="text-xs text-[#8e6f3f]">
+                      <span className="text-xs text-[var(--gold-dark)]">
                         · {s.trv}m
                       </span>
                     </div>
                     <div className="md:col-span-7 flex-1 min-w-0">
                       <p className="font-medium text-sm">{s.k}</p>
-                      <p className="text-xs text-[#5a4a32] mt-0.5">{s.t}</p>
+                      <p className="text-xs text-[var(--ink-soft)] mt-0.5">{s.t}</p>
                     </div>
                     <div className="md:col-span-3 text-right">
                       <Link
                         href="#"
-                        className="text-xs text-[#8e6f3f] hover:text-[#2a1f12]"
+                        className="text-xs text-[var(--gold-dark)] hover:text-[var(--ink)]"
                       >
                         Příprava →
                       </Link>

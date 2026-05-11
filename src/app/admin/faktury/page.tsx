@@ -57,9 +57,9 @@ const faktury = [
 ];
 
 const stavStyl = {
-  k_vystaveni: "bg-[#c8a867]/30 text-[#8e6f3f] border-[#c8a867]/60",
-  k_uhrade: "bg-[#c8a867]/15 text-[#8e6f3f] border-[#c8a867]/30",
-  uhrazeno: "bg-white/80 text-[#5a4a32] border-[#c8a867]/20",
+  k_vystaveni: "bg-[var(--gold)]/30 text-[var(--gold-dark)] border-[var(--gold)]/60",
+  k_uhrade: "bg-[var(--gold)]/15 text-[var(--gold-dark)] border-[var(--gold)]/30",
+  uhrazeno: "bg-white/80 text-[var(--ink-soft)] border-[var(--gold)]/20",
 };
 
 const stavLabel = {
@@ -73,7 +73,7 @@ export default function AdminFaktury() {
     <div>
       <div className="flex items-baseline justify-between mb-8 flex-wrap gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-[#8e6f3f] mb-3">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
             Květen 2026
           </p>
           <h1 className="display text-4xl md:text-5xl">Fakturace</h1>
@@ -81,7 +81,7 @@ export default function AdminFaktury() {
         <button
           className="rounded-full px-5 py-2.5 text-sm text-white"
           style={{
-            background: "linear-gradient(135deg, #c8a867 0%, #5a3825 100%)",
+            background: "linear-gradient(135deg, var(--gold) 0%, var(--ink) 100%)",
           }}
         >
           Vystavit 2 čekající
@@ -91,39 +91,39 @@ export default function AdminFaktury() {
       {/* Summary */}
       <div className="grid md:grid-cols-4 gap-4 mb-8">
         <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6">
-          <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
             K vystavení
           </p>
           <p className="display text-3xl gold-grad">14 200 Kč</p>
-          <p className="text-xs text-[#5a4a32] mt-1">2 položky</p>
+          <p className="text-xs text-[var(--ink-soft)] mt-1">2 položky</p>
         </div>
         <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6">
-          <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
             K úhradě
           </p>
           <p className="display text-3xl">5 800 Kč</p>
-          <p className="text-xs text-[#5a4a32] mt-1">1 položka</p>
+          <p className="text-xs text-[var(--ink-soft)] mt-1">1 položka</p>
         </div>
         <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6">
-          <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
             YTD inkaso
           </p>
           <p className="display text-3xl">552 600 Kč</p>
-          <p className="text-xs text-[#5a4a32] mt-1">98 faktur · 23 klienti</p>
+          <p className="text-xs text-[var(--ink-soft)] mt-1">98 faktur · 23 klienti</p>
         </div>
         <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6">
-          <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
             Roční target
           </p>
           <p className="display text-3xl">1 600 000 Kč</p>
-          <p className="text-xs text-[#5a4a32] mt-1">35 % splněno</p>
+          <p className="text-xs text-[var(--ink-soft)] mt-1">35 % splněno</p>
         </div>
       </div>
 
-      <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl overflow-hidden shadow-md shadow-[#c8a867]/5">
+      <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl overflow-hidden shadow-md shadow-[var(--gold)]/5">
         <div className="overflow-x-auto">
         <table className="w-full text-sm min-w-[780px]">
-          <thead className="text-[10px] uppercase tracking-widest text-[#8e6f3f] border-b border-[#c8a867]/20">
+          <thead className="text-[10px] uppercase tracking-widest text-[var(--gold-dark)] border-b border-[var(--gold)]/20">
             <tr>
               <th className="text-left px-6 py-4">Číslo</th>
               <th className="text-left px-6 py-4">Klient</th>
@@ -138,12 +138,12 @@ export default function AdminFaktury() {
             {faktury.map((f) => (
               <tr
                 key={f.cislo}
-                className="border-b border-[#c8a867]/10 last:border-0 hover:bg-white/50 transition"
+                className="border-b border-[var(--gold)]/10 last:border-0 hover:bg-white/50 transition"
               >
                 <td className="px-6 py-4 font-medium">{f.cislo}</td>
                 <td className="px-6 py-4">{f.klient}</td>
-                <td className="px-6 py-4 text-[#5a4a32]">{f.polozka}</td>
-                <td className="px-6 py-4 text-[#5a4a32]">{f.datum}</td>
+                <td className="px-6 py-4 text-[var(--ink-soft)]">{f.polozka}</td>
+                <td className="px-6 py-4 text-[var(--ink-soft)]">{f.datum}</td>
                 <td className="px-6 py-4 text-right">{f.castka}</td>
                 <td className="px-6 py-4">
                   <span
@@ -155,7 +155,7 @@ export default function AdminFaktury() {
                 <td className="px-6 py-4 text-right">
                   <a
                     href="#"
-                    className="text-[#8e6f3f] hover:text-[#2a1f12] text-xs"
+                    className="text-[var(--gold-dark)] hover:text-[var(--ink)] text-xs"
                   >
                     {f.stav === "k_vystaveni"
                       ? "Vystavit →"

@@ -18,6 +18,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/favicon.svg",
+  },
   title: {
     default: "Libuše Stuňová · Účetnictví",
     template: "%s · Libuše Stuňová",

@@ -10,28 +10,28 @@ export default function PortalDashboard() {
   return (
     <div className="max-w-5xl">
       <div className="mb-10">
-        <p className="text-xs uppercase tracking-[0.3em] text-[#8e6f3f] mb-3">
+        <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
           Pátek · 9. května
         </p>
         <h1 className="display text-4xl md:text-5xl mb-3">
           Dobré ráno, <span className="gold-grad italic">Jane</span>.
         </h1>
-        <p className="text-[#5a4a32] max-w-xl">
+        <p className="text-[var(--ink-soft)] max-w-xl">
           Tady je všechno, co tě teď v účetnictví čeká. Bez stresu.
         </p>
       </div>
 
       {/* Next deadline */}
-      <div className="bg-white/70 backdrop-blur-xl border border-white rounded-[2rem] p-8 mb-6 shadow-xl shadow-[#c8a867]/10">
+      <div className="bg-white/70 backdrop-blur-xl border border-white rounded-[2rem] p-8 mb-6 shadow-xl shadow-[var(--gold)]/10">
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div>
-            <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+            <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
               Nejbližší termín
             </p>
             <h2 className="display text-2xl md:text-3xl mb-3">
               DPH za duben — kontrolní hlášení
             </h2>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#5a4a32]">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--ink-soft)]">
               <span>📅 Termín 25. května 2026</span>
               <span>📦 Připraveno k podpisu</span>
               <span>👤 Libuše to vyřídí, ty jen schválíš</span>
@@ -40,15 +40,15 @@ export default function PortalDashboard() {
           <div className="flex flex-col gap-2">
             <Link
               href="/portal/dokumenty"
-              className="rounded-full px-6 py-3 text-sm text-white shadow-lg shadow-[#c8a867]/30"
+              className="rounded-full px-6 py-3 text-sm text-white shadow-lg shadow-[var(--gold)]/30"
               style={{
                 background:
-                  "linear-gradient(135deg, #c8a867 0%, #5a3825 100%)",
+                  "linear-gradient(135deg, var(--gold) 0%, var(--ink) 100%)",
               }}
             >
               Schválit a podepsat
             </Link>
-            <button className="rounded-full px-6 py-2 text-xs bg-white/80 border border-[#c8a867]/30 hover:bg-white transition">
+            <button className="rounded-full px-6 py-2 text-xs bg-white/80 border border-[var(--gold)]/30 hover:bg-white transition">
               Mám dotaz
             </button>
           </div>
@@ -64,25 +64,25 @@ export default function PortalDashboard() {
         ].map((k) => (
           <div
             key={k.l}
-            className="bg-white/60 backdrop-blur-xl border border-white rounded-2xl p-6 shadow-md shadow-[#c8a867]/5"
+            className="bg-white/60 backdrop-blur-xl border border-white rounded-2xl p-6 shadow-md shadow-[var(--gold)]/5"
           >
-            <p className="text-xs uppercase tracking-widest text-[#8e6f3f] mb-2">
+            <p className="text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
               {k.l}
             </p>
             <p className="display text-4xl mb-1">{k.v}</p>
-            <p className="text-xs text-[#5a4a32]">{k.sub}</p>
+            <p className="text-xs text-[var(--ink-soft)]">{k.sub}</p>
           </div>
         ))}
       </div>
 
       {/* Two columns */}
       <div className="grid md:grid-cols-3 gap-6">
-        <div className="md:col-span-2 bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-8 shadow-md shadow-[#c8a867]/5">
+        <div className="md:col-span-2 bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-8 shadow-md shadow-[var(--gold)]/5">
           <div className="flex items-baseline justify-between mb-6">
             <h3 className="display text-2xl">Co se dělo</h3>
             <Link
               href="/portal/dokumenty"
-              className="text-xs text-[#8e6f3f] hover:text-[#2a1f12]"
+              className="text-xs text-[var(--gold-dark)] hover:text-[var(--ink)]"
             >
               Vše →
             </Link>
@@ -106,19 +106,19 @@ export default function PortalDashboard() {
               },
             ].map((a) => (
               <li key={a.t} className="flex gap-4">
-                <div className="text-xs text-[#8e6f3f] w-20 shrink-0 pt-1 uppercase tracking-wide">
+                <div className="text-xs text-[var(--gold-dark)] w-20 shrink-0 pt-1 uppercase tracking-wide">
                   {a.d}
                 </div>
-                <div className="flex-1 border-l border-[#c8a867]/20 pl-4">
+                <div className="flex-1 border-l border-[var(--gold)]/20 pl-4">
                   <p className="font-medium mb-1">{a.t}</p>
-                  <p className="text-sm text-[#5a4a32]">{a.s}</p>
+                  <p className="text-sm text-[var(--ink-soft)]">{a.s}</p>
                 </div>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-8 shadow-md shadow-[#c8a867]/5">
+        <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-8 shadow-md shadow-[var(--gold)]/5">
           <h3 className="display text-2xl mb-6">Pro tebe</h3>
           <ul className="space-y-4">
             {[
@@ -142,19 +142,19 @@ export default function PortalDashboard() {
                 <span
                   className={`mt-0.5 size-5 rounded-full border flex items-center justify-center text-xs ${
                     task.done
-                      ? "bg-[#5a3825] border-[#5a3825] text-white"
-                      : "border-[#c8a867]/40"
+                      ? "bg-[var(--ink)] border-[var(--ink)] text-white"
+                      : "border-[var(--gold)]/40"
                   }`}
                 >
                   {task.done ? "✓" : ""}
                 </span>
                 <div className="flex-1">
                   <p
-                    className={`text-sm ${task.done ? "line-through text-[#5a4a32]/60" : ""}`}
+                    className={`text-sm ${task.done ? "line-through text-[var(--ink-soft)]/60" : ""}`}
                   >
                     {task.t}
                   </p>
-                  <p className="text-xs text-[#8e6f3f] mt-0.5">{task.h}</p>
+                  <p className="text-xs text-[var(--gold-dark)] mt-0.5">{task.h}</p>
                 </div>
               </li>
             ))}

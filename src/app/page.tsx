@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -14,15 +17,25 @@ import {
   CheckCircle2,
   Clock,
   Shield,
+  Menu,
+  X,
 } from "lucide-react";
 
 const logoUrl = "/stunova-logo.jpg";
-const heroVideoUrl = "/hero-video.mp4";
+
+const navLinks = [
+  ["Služby", "#sluzby"],
+  ["Jak to chodí", "#proces"],
+  ["O mně", "#o-mne"],
+  ["Kontakt", "#kontakt"],
+] as const;
 
 /* ============================================
    SiteNav
    ============================================ */
 function SiteNav() {
+  const [open, setOpen] = useState(false);
+
   return (
     <nav
       aria-label="Hlavní navigace"
@@ -39,18 +52,14 @@ function SiteNav() {
               className="rounded-md object-cover"
             />
           </div>
-          <span className="text-sm font-medium text-[var(--ink)]">
+          <span className="hidden sm:inline text-sm font-medium text-[var(--ink)]">
             Libuše Stuňová
           </span>
         </Link>
 
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1 bg-[var(--cream)] rounded-full px-2 py-1.5 border border-[var(--gold)]/15">
-          {[
-            ["Služby", "#sluzby"],
-            ["Jak to chodí", "#proces"],
-            ["O mně", "#o-mne"],
-            ["Kontakt", "#kontakt"],
-          ].map(([label, href]) => (
+          {navLinks.map(([label, href]) => (
             <a
               key={href}
               href={href}
@@ -61,41 +70,65 @@ function SiteNav() {
           ))}
         </div>
 
-        <Link href="/prihlaseni" className="btn-soft text-xs py-2 px-4">
-          Přihlášení
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/prihlaseni" className="btn-soft text-xs py-2 px-4">
+            Přihlášení
+          </Link>
+
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="md:hidden p-2 rounded-xl hover:bg-[var(--sand)] transition"
+            aria-label={open ? "Zavřít menu" : "Otevřít menu"}
+            aria-expanded={open}
+          >
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="md:hidden border-t border-[var(--gold)]/10 bg-[var(--background)]/95 backdrop-blur-xl px-6 py-4 space-y-1">
+          {navLinks.map(([label, href]) => (
+            <a
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              className="block px-4 py-3 rounded-xl text-sm text-[var(--ink-soft)] hover:text-[var(--ink)] hover:bg-[var(--sand)] transition"
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
 
 /* ============================================
-   Hero
+   Hero — gradient fallback (no video)
    ============================================ */
 function Hero() {
   return (
-    <section className="pt-28 pb-20 px-6">
+    <section className="pt-28 pb-20 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
-        {/* Video band */}
-        <div className="relative aspect-[21/9] rounded-3xl overflow-hidden mb-12 fade-up">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            poster="/stunova-logo.jpg"
-          >
-            <source src={heroVideoUrl} type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-[oklch(0.215_0.030_55/0.55)]" />
+        {/* Hero band — gradient with logo */}
+        <div
+          className="relative aspect-[21/9] rounded-3xl overflow-hidden mb-12"
+          style={{
+            background:
+              "linear-gradient(135deg, var(--cream) 0%, var(--sand) 40%, var(--gold-light) 100%)",
+          }}
+        >
           <div className="absolute inset-0 flex items-center justify-center">
             <Image
               src={logoUrl}
               alt="Libuše Stuňová · Účetnictví"
-              width={240}
-              height={183}
-              className="opacity-90"
+              width={280}
+              height={214}
+              className="opacity-90 max-w-[60%] h-auto"
               priority
             />
           </div>
@@ -103,24 +136,24 @@ function Hero() {
 
         {/* Content */}
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--cream)] border border-[var(--gold)]/20 mb-8 fade-up-1">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--cream)] border border-[var(--gold)]/20 mb-8">
             <span className="pulse-dot" />
             <span className="text-xs font-medium text-[var(--ink-soft)]">
               Beru klienty od ledna 2026
             </span>
           </div>
 
-          <h1 className="display text-4xl md:text-6xl lg:text-7xl mb-6 fade-up-2">
+          <h1 className="display text-4xl md:text-6xl lg:text-7xl mb-6">
             Účetnictví, u kterého se{" "}
             <span className="gold-grad">nestresuješ</span>.
           </h1>
 
-          <p className="text-lg text-[var(--ink-soft)] max-w-xl mx-auto mb-10 fade-up-3">
+          <p className="text-lg text-[var(--ink-soft)] max-w-xl mx-auto mb-10">
             Účetní jako parťák, ne jen servis ke konci roku. Potkáme se na
             kafíčku, probereme čísla a ty máš klid celý měsíc.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center fade-up-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#kontakt" className="btn-gold">
               Domluvit kafíčko <Coffee className="w-4 h-4" />
             </a>
@@ -130,8 +163,8 @@ function Hero() {
           </div>
         </div>
 
-        {/* Client card */}
-        <div className="mt-16 max-w-md mx-auto card-warm p-6 fade-up-5">
+        {/* Stats card — about Libuše, not client */}
+        <div className="mt-16 max-w-md mx-auto card-warm p-6">
           <div className="flex items-center gap-4 mb-4">
             <div className="logo-mark">
               <Image
@@ -143,8 +176,10 @@ function Hero() {
               />
             </div>
             <div>
-              <p className="text-sm font-medium">Typický klient</p>
-              <p className="text-xs text-[var(--ink-soft)]">s.r.o. · Praha</p>
+              <p className="text-sm font-medium">Libuše Stuňová</p>
+              <p className="text-xs text-[var(--ink-soft)]">
+                Účetní · Praha 4
+              </p>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4 text-center">
@@ -155,9 +190,9 @@ function Hero() {
               </p>
             </div>
             <div>
-              <p className="display text-2xl gold-grad">62</p>
+              <p className="display text-2xl gold-grad">23</p>
               <p className="text-[10px] uppercase tracking-widest text-[var(--ink-soft)] mt-1">
-                dokladů/měs
+                klientů
               </p>
             </div>
             <div>
@@ -196,7 +231,7 @@ function Services() {
   ];
 
   return (
-    <section id="sluzby" className="py-20 px-6">
+    <section id="sluzby" className="py-20 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
@@ -206,15 +241,12 @@ function Services() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {services.map((s, i) => (
-            <div
-              key={s.title}
-              className={`card-warm p-8 fade-up-${i + 1}`}
-            >
+          {services.map((s) => (
+            <div key={s.title} className="card-warm p-8">
               <div className="w-12 h-12 rounded-xl bg-[var(--cream)] border border-[var(--gold)]/15 flex items-center justify-center mb-5">
                 <s.icon className="w-5 h-5 text-[var(--gold-dark)]" />
               </div>
-              <h3 className="display text-xl mb-3 not-italic">{s.title}</h3>
+              <h3 className="font-medium text-lg mb-3">{s.title}</h3>
               <p className="text-sm text-[var(--ink-soft)] leading-relaxed">
                 {s.desc}
               </p>
@@ -258,7 +290,7 @@ function Process() {
   ];
 
   return (
-    <section id="proces" className="py-20 px-6">
+    <section id="proces" className="py-20 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
@@ -269,7 +301,7 @@ function Process() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((s, i) => (
-            <div key={s.num} className={`relative fade-up-${i + 1}`}>
+            <div key={s.num} className="relative">
               <div className="card-warm p-6 h-full">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="display text-3xl gold-grad not-italic">
@@ -298,7 +330,7 @@ function Process() {
    ============================================ */
 function About() {
   return (
-    <section id="o-mne" className="py-20 px-6">
+    <section id="o-mne" className="py-20 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="card-warm p-8 md:p-12 grid md:grid-cols-5 gap-8 items-center">
           <div className="md:col-span-2 flex justify-center">
@@ -316,7 +348,9 @@ function About() {
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
               O mně
             </p>
-            <h2 className="display text-3xl md:text-4xl mb-4">Libuše Stuňová</h2>
+            <h2 className="display text-3xl md:text-4xl mb-4">
+              Libuše Stuňová
+            </h2>
             <p className="text-[var(--ink-soft)] leading-relaxed mb-4">
               Účetnictví dělám přes 14 let. Začínala jsem v korporátu, ale
               zjistila jsem, že mě baví pracovat s malými firmami a OSVČ, kde
@@ -379,8 +413,8 @@ function ClientZone() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-10">
-          {channels.map((ch, i) => (
-            <div key={ch.title} className={`card-warm p-8 text-center fade-up-${i + 1}`}>
+          {channels.map((ch) => (
+            <div key={ch.title} className="card-warm p-8 text-center">
               <div className="w-14 h-14 rounded-2xl bg-[var(--cream)] border border-[var(--gold)]/15 flex items-center justify-center mx-auto mb-5">
                 <ch.icon className="w-6 h-6 text-[var(--gold-dark)]" />
               </div>
@@ -409,9 +443,10 @@ function Contact() {
   return (
     <section
       id="kontakt"
-      className="py-20 px-6 rounded-t-[3rem] mt-10"
+      className="py-20 px-6 scroll-mt-24"
       style={{
-        background: "linear-gradient(135deg, oklch(0.215 0.030 55) 0%, oklch(0.566 0.082 67.5) 100%)",
+        background:
+          "linear-gradient(135deg, oklch(0.215 0.030 55) 0%, oklch(0.566 0.082 67.5) 100%)",
       }}
     >
       <div className="max-w-4xl mx-auto text-center">
@@ -429,13 +464,13 @@ function Contact() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
           <a
             href="mailto:libuse@stunova.cz"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium bg-[var(--gold)] text-[var(--ink)] hover:bg-[var(--gold-light)] transition"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium bg-[var(--gold)] text-[var(--ink)] hover:bg-[var(--gold-light)] transition"
           >
             <Mail className="w-4 h-4" /> libuse@stunova.cz
           </a>
           <a
             href="tel:+420728000000"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium border border-[var(--gold)]/40 text-[var(--cream)] hover:bg-[var(--gold)]/10 transition"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium border border-[var(--gold)]/40 text-[var(--cream)] hover:bg-[var(--gold)]/10 transition"
           >
             <Phone className="w-4 h-4" /> +420 728 ••• •••
           </a>
@@ -454,7 +489,12 @@ function Contact() {
    ============================================ */
 function SiteFooter() {
   return (
-    <footer className="py-10 px-6 border-t border-[var(--gold)]/10">
+    <footer
+      className="py-10 px-6"
+      style={{
+        background: "oklch(0.215 0.030 55)",
+      }}
+    >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="logo-mark">
@@ -466,15 +506,21 @@ function SiteFooter() {
               className="rounded-md object-cover"
             />
           </div>
-          <span className="text-sm text-[var(--ink-soft)]">
+          <span className="text-sm text-[var(--sand)]">
             © 2026 Libuše Stuňová
           </span>
         </div>
-        <div className="flex items-center gap-6 text-sm text-[var(--ink-soft)]">
-          <Link href="/prihlaseni" className="hover:text-[var(--ink)] transition">
+        <div className="flex items-center gap-6 text-sm text-[var(--sand)]">
+          <Link
+            href="/prihlaseni"
+            className="hover:text-[var(--cream)] transition"
+          >
             Klientský portál
           </Link>
-          <a href="#kontakt" className="hover:text-[var(--ink)] transition">
+          <a
+            href="mailto:libuse@stunova.cz"
+            className="hover:text-[var(--cream)] transition"
+          >
             Kontakt
           </a>
         </div>
