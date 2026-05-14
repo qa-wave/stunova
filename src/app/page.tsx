@@ -24,6 +24,7 @@ import { FadeIn } from "@/components/FadeIn";
 import { FAQ } from "@/components/FAQ";
 
 const logoUrl = "/stunova-logo.jpg";
+const logoTransparentUrl = "/stunova-logo-transparent.png";
 
 /* ============================================
    Hero
@@ -32,21 +33,37 @@ function Hero() {
   return (
     <section id="hero" className="pt-28 pb-16 md:pt-32 md:pb-20 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
-        {/* Hero band */}
-        <div
-          className="relative aspect-[3/1] sm:aspect-[16/7] md:aspect-[21/9] rounded-3xl overflow-hidden mb-12"
-          style={{
-            background: "linear-gradient(135deg, var(--cream) 0%, var(--sand) 40%, var(--gold-light) 100%)",
-          }}
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
+        {/* Animated hero band */}
+        <div className="relative aspect-[3/1] sm:aspect-[16/7] md:aspect-[21/9] rounded-3xl overflow-hidden mb-12 hero-band">
+          {/* Animated gradient background */}
+          <div className="absolute inset-0 hero-gradient" />
+          {/* Light sweep */}
+          <div className="absolute inset-0 hero-sweep" />
+          {/* Floating particles */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+            {[...Array(12)].map((_, i) => (
+              <span
+                key={i}
+                className="hero-particle"
+                style={{
+                  left: `${8 + (i * 7.5) % 85}%`,
+                  animationDelay: `${i * 0.7}s`,
+                  animationDuration: `${4 + (i % 3) * 2}s`,
+                  width: `${3 + (i % 4)}px`,
+                  height: `${3 + (i % 4)}px`,
+                }}
+              />
+            ))}
+          </div>
+          {/* Transparent logo */}
+          <div className="absolute inset-0 flex items-center justify-center z-10">
             <Image
-              src={logoUrl}
+              src={logoTransparentUrl}
               alt="Libuše Stuňová · Účetnictví"
-              width={280}
-              height={214}
-              sizes="(max-width: 640px) 70vw, (max-width: 1024px) 50vw, 280px"
-              className="opacity-90 max-w-[70%] sm:max-w-[60%] h-auto"
+              width={320}
+              height={244}
+              sizes="(max-width: 640px) 70vw, (max-width: 1024px) 50vw, 320px"
+              className="max-w-[75%] sm:max-w-[55%] h-auto drop-shadow-[0_4px_24px_oklch(0.566_0.082_67.5/0.3)]"
               priority
             />
           </div>

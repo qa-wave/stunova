@@ -233,6 +233,63 @@
   }
 }
 
+/* ============================================
+   Hero band animations
+   ============================================ */
+.hero-band {
+  background: var(--ink);
+}
+
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 70% 60% at 25% 40%, oklch(0.845 0.075 82 / 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 75% 60%, oklch(0.762 0.094 80.5 / 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 80% at 50% 50%, oklch(0.955 0.025 85 / 0.15) 0%, transparent 70%),
+    linear-gradient(135deg, oklch(0.35 0.055 55) 0%, oklch(0.215 0.030 55) 50%, oklch(0.35 0.04 70) 100%);
+  animation: heroGradientShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroGradientShift {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1.01) translate(1%, -0.5%); }
+}
+
+.hero-sweep {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 35%,
+    oklch(0.845 0.075 82 / 0.12) 45%,
+    oklch(0.955 0.025 85 / 0.08) 50%,
+    oklch(0.845 0.075 82 / 0.12) 55%,
+    transparent 65%,
+    transparent 100%
+  );
+  animation: heroSweep 6s ease-in-out infinite;
+}
+
+@keyframes heroSweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.hero-particle {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  animation: heroFloat linear infinite;
+}
+
+@keyframes heroFloat {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-200px); opacity: 0; }
+}
+
 .fade-up { animation: fadeUp 0.8s ease-out both; }
 .fade-up-1 { animation: fadeUp 0.8s ease-out 0.1s both; }
 .fade-up-2 { animation: fadeUp 0.8s ease-out 0.2s both; }
