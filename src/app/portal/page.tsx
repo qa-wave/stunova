@@ -7,11 +7,16 @@ export const metadata: Metadata = {
 };
 
 export default function PortalDashboard() {
+  const now = new Date();
+  const dayName = now.toLocaleDateString('cs-CZ', { weekday: 'long' });
+  const dayMonth = now.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long' });
+  const dateStr = `${dayName.charAt(0).toUpperCase() + dayName.slice(1)} · ${dayMonth}`;
+
   return (
     <div className="max-w-5xl">
       <div className="mb-10">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
-          Pátek · 9. května
+          {dateStr}
         </p>
         <h1 className="display text-4xl md:text-5xl mb-3">
           Dobré ráno, <span className="gold-grad italic">Jane</span>.
@@ -32,9 +37,9 @@ export default function PortalDashboard() {
               DPH za duben — kontrolní hlášení
             </h2>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--ink-soft)]">
-              <span>📅 Termín 25. května 2026</span>
-              <span>📦 Připraveno k podpisu</span>
-              <span>👤 Libuše to vyřídí, ty jen schválíš</span>
+              <span><span aria-hidden="true">📅</span> Termín 25. května 2026</span>
+              <span><span aria-hidden="true">📦</span> Připraveno k podpisu</span>
+              <span><span aria-hidden="true">👤</span> Libuše to vyřídí, ty jen schválíš</span>
             </div>
           </div>
           <div className="flex flex-col gap-2">
@@ -139,7 +144,10 @@ export default function PortalDashboard() {
               },
             ].map((task) => (
               <li key={task.t} className="flex items-start gap-3">
-                <span
+                <button
+                  role="checkbox"
+                  aria-checked={task.done}
+                  tabIndex={0}
                   className={`mt-0.5 size-5 rounded-full border flex items-center justify-center text-xs ${
                     task.done
                       ? "bg-[var(--ink)] border-[var(--ink)] text-white"
@@ -147,7 +155,7 @@ export default function PortalDashboard() {
                   }`}
                 >
                   {task.done ? "✓" : ""}
-                </span>
+                </button>
                 <div className="flex-1">
                   <p
                     className={`text-sm ${task.done ? "line-through text-[var(--ink-soft)]/60" : ""}`}

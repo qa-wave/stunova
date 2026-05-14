@@ -59,7 +59,7 @@ export default function PortalSchuzky() {
       <div className="flex items-baseline justify-between mb-8 flex-wrap gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
-            Naše společné kafíčka ☕
+            Naše společné kafíčka <span aria-hidden="true">☕</span>
           </p>
           <h1 className="display text-4xl md:text-5xl">Schůzky</h1>
         </div>
@@ -91,7 +91,7 @@ export default function PortalSchuzky() {
                     {s.stav === "naplanovane" ? "Plánováno" : "Hotovo"}
                   </span>
                 </div>
-                <p className="text-sm text-[var(--ink-soft)] mb-2">📍 {s.kde}</p>
+                <p className="text-sm text-[var(--ink-soft)] mb-2"><span aria-hidden="true">📍</span> {s.kde}</p>
                 <p className="text-sm">{s.poznamky}</p>
               </div>
               <div className="md:col-span-3 flex md:justify-end gap-2">

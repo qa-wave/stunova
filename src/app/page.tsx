@@ -13,11 +13,15 @@ import {
   Camera,
   MessageCircle,
   Mail,
+  CheckCircle,
+  Quote,
 } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
 import { ContactForm } from "@/components/ContactForm";
 import { CookieConsent } from "@/components/CookieConsent";
+import { MobileCTA } from "@/components/MobileCTA";
 import { FadeIn } from "@/components/FadeIn";
+import { FAQ } from "@/components/FAQ";
 
 const logoUrl = "/stunova-logo.jpg";
 
@@ -26,14 +30,13 @@ const logoUrl = "/stunova-logo.jpg";
    ============================================ */
 function Hero() {
   return (
-    <section className="pt-28 pb-20 px-6 scroll-mt-24">
+    <section id="hero" className="pt-28 pb-16 md:pt-32 md:pb-20 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
-        {/* Hero band — responsive aspect ratio */}
+        {/* Hero band */}
         <div
-          className="relative aspect-[4/3] sm:aspect-[16/7] md:aspect-[21/9] rounded-3xl overflow-hidden mb-12"
+          className="relative aspect-[3/1] sm:aspect-[16/7] md:aspect-[21/9] rounded-3xl overflow-hidden mb-12"
           style={{
-            background:
-              "linear-gradient(135deg, var(--cream) 0%, var(--sand) 40%, var(--gold-light) 100%)",
+            background: "linear-gradient(135deg, var(--cream) 0%, var(--sand) 40%, var(--gold-light) 100%)",
           }}
         >
           <div className="absolute inset-0 flex items-center justify-center">
@@ -54,21 +57,21 @@ function Hero() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--cream)] border border-[var(--gold)]/20 mb-8">
             <span className="pulse-dot" />
             <span className="text-xs font-medium text-[var(--ink-soft)]">
-              Beru klienty od ledna 2026
+              Přijímám 2–3 nové klienty
             </span>
           </div>
 
           <h1 className="display text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-[1.15] mb-6">
-            Účetnictví, u kterého se{" "}
+            Účetnictví, u&nbsp;kterého se{" "}
             <span className="gold-grad">nestresuješ</span>.
           </h1>
 
-          <p className="text-lg text-[var(--ink-soft)] max-w-xl mx-auto mb-10">
+          <p className="text-lg text-[var(--ink-soft)] max-w-xl mx-auto mb-8">
             Účetní jako parťák, ne jen servis ke konci roku. Potkáme se na
             kafíčku, probereme čísla a ty máš klid celý měsíc.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
             <a href="#kontakt" className="btn-gold w-full sm:w-auto justify-center">
               Domluvit kafíčko <Coffee className="w-4 h-4" />
             </a>
@@ -76,45 +79,19 @@ function Hero() {
               Co nabízím <ArrowRight className="w-4 h-4" />
             </a>
           </div>
-        </div>
 
-        {/* Stats card */}
-        <div className="mt-16 max-w-md mx-auto card-warm p-6">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="logo-mark">
-              <Image
-                src={logoUrl}
-                alt=""
-                width={24}
-                height={24}
-                sizes="24px"
-                className="rounded-md object-cover"
-              />
-            </div>
-            <div>
-              <p className="text-sm font-medium">Libuše Stuňová</p>
-              <p className="text-xs text-[var(--ink-soft)]">Účetní · Praha 4</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <p className="display text-2xl gold-grad">14+</p>
-              <p className="text-xs uppercase tracking-wide text-[var(--ink-soft)] mt-1">
-                let praxe
-              </p>
-            </div>
-            <div>
-              <p className="display text-2xl gold-grad">23</p>
-              <p className="text-xs uppercase tracking-wide text-[var(--ink-soft)] mt-1">
-                klientů
-              </p>
-            </div>
-            <div>
-              <p className="display text-2xl gold-grad">0</p>
-              <p className="text-xs uppercase tracking-wide text-[var(--ink-soft)] mt-1">
-                pokut
-              </p>
-            </div>
+          {/* Stats inline — nad fold */}
+          <div className="flex justify-center gap-8 pt-8 border-t border-[var(--gold)]/15">
+            {[
+              { v: "14+", l: "let praxe" },
+              { v: "23", l: "spokojených klientů" },
+              { v: "0", l: "pokut od FÚ" },
+            ].map((s) => (
+              <div key={s.l} className="text-center">
+                <p className="display text-2xl md:text-3xl gold-grad">{s.v}</p>
+                <p className="text-xs uppercase tracking-wide text-[var(--ink-soft)] mt-1">{s.l}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -123,34 +100,61 @@ function Hero() {
 }
 
 /* ============================================
-   Services
+   Trust Bar
+   ============================================ */
+function TrustBar() {
+  const items = [
+    "14+ let praxe",
+    "23 spokojených klientů",
+    "Odpověď do 24 h",
+    "Pojištění odpovědnosti",
+    "GDPR v pořádku",
+    "0 pokut za celou kariéru",
+  ];
+  return (
+    <div className="py-6 px-6 overflow-x-auto">
+      <div className="max-w-6xl mx-auto flex items-center justify-center gap-4 md:gap-8 min-w-max md:min-w-0">
+        {items.map((item, i) => (
+          <span key={item} className="flex items-center gap-4 text-xs uppercase tracking-wide text-[var(--ink-soft)]">
+            {i > 0 && <span className="w-1 h-1 rounded-full bg-[var(--gold)]" aria-hidden="true" />}
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================
+   Services — benefit-driven copy
    ============================================ */
 const services = [
   {
     icon: BookOpen,
-    title: "Vedení účetnictví",
-    desc: "Kompletní podvojné účetnictví pro s.r.o. Fakturace, přiznání DPH, kontrolní hlášení, závěrky.",
+    title: "Klid v číslech",
+    subtitle: "Vedení účetnictví",
+    desc: "Měsíční zpracování od A do Z. Ty podnikáš, já se starám o daně, výkazy a kontrolní hlášení. Žádné překvapení v březnu.",
   },
   {
     icon: Calculator,
-    title: "Daňová evidence",
-    desc: "Pro OSVČ a menší firmy. Přehledná evidence příjmů a výdajů, daňové přiznání, komunikace s FÚ.",
+    title: "Jednoduchost",
+    subtitle: "Daňová evidence",
+    desc: "Pro OSVČ a menší firmy. Přehledná evidence, daňové přiznání, komunikace s FÚ. Vysvětlím ti to, dokud to nedává smysl.",
   },
   {
     icon: Users,
-    title: "Mzdy a personalistika",
-    desc: "Výpočet mezd, odvody na SP a ZP, roční zúčtování, přihlášky a odhlášky zaměstnanců.",
+    title: "Každý měsíc v pořádku",
+    subtitle: "Mzdy a personalistika",
+    desc: "Výpočet mezd, odvody, roční zúčtování. Nástup i odchod zaměstnance — napíšu ti přesně, co máš udělat.",
   },
 ];
 
 function Services() {
   return (
-    <section id="sluzby" className="py-20 px-6 scroll-mt-24">
+    <section id="sluzby" className="py-24 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold-dark)] mb-3">
-            Co pro tebe udělám
-          </p>
+          <p className="label-sm mb-3">Co pro tebe udělám</p>
           <h2 className="display text-3xl md:text-5xl">Služby</h2>
         </div>
 
@@ -161,14 +165,130 @@ function Services() {
                 <div className="w-12 h-12 rounded-xl bg-[var(--cream)] border border-[var(--gold)]/15 flex items-center justify-center mb-5">
                   <s.icon className="w-5 h-5 text-[var(--gold-dark)]" />
                 </div>
-                <h3 className="font-medium text-lg mb-3">{s.title}</h3>
-                <p className="text-sm text-[var(--ink-soft)] leading-relaxed">
-                  {s.desc}
-                </p>
+                <p className="text-[10px] uppercase tracking-[0.15em] text-[var(--gold-dark)] mb-1">{s.subtitle}</p>
+                <h3 className="display text-xl not-italic font-medium mb-3">{s.title}</h3>
+                <p className="text-sm text-[var(--ink-soft)] leading-relaxed">{s.desc}</p>
               </div>
             </FadeIn>
           ))}
         </div>
+
+        <div className="text-center mt-10">
+          <a href="#cenik" className="btn-soft">
+            Zjistit ceny <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================
+   Pricing — 3 balíčky
+   ============================================ */
+const plans = [
+  {
+    name: "OSVČ a živnostník",
+    price: "od 2 500",
+    desc: "Daňová evidence, daňové přiznání, komunikace s FÚ.",
+    features: [
+      "Evidence příjmů a výdajů",
+      "Daňové přiznání 1× ročně",
+      "Odpovědi na dotazy do 24h",
+      "Měsíční kafíčko",
+    ],
+    highlight: false,
+  },
+  {
+    name: "Malá s.r.o.",
+    price: "od 5 000",
+    desc: "Podvojné účetnictví, DPH, závěrky — o nic se nestaráš.",
+    features: [
+      "Podvojné účetnictví",
+      "DPH a kontrolní hlášení",
+      "Roční závěrka",
+      "Mzdy (do 3 zaměstnanců)",
+      "Odpovědi na dotazy do 24h",
+      "Měsíční kafíčko",
+    ],
+    highlight: true,
+  },
+  {
+    name: "Na míru",
+    price: "Domluvíme se",
+    desc: "Více zaměstnanců, složitější struktura, nebo jen potřebuješ poradit?",
+    features: [
+      "Rozšířené účetnictví",
+      "Mzdy 4+ zaměstnanců",
+      "Příprava podkladů pro audit",
+      "Prioritní podpora",
+    ],
+    highlight: false,
+  },
+];
+
+function Pricing() {
+  return (
+    <section id="cenik" className="py-24 px-6 scroll-mt-24">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-14">
+          <p className="label-sm mb-3">Kolik to stojí</p>
+          <h2 className="display text-3xl md:text-5xl">
+            Cena podle toho, co potřebuješ
+          </h2>
+          <p className="text-[var(--ink-soft)] mt-4 max-w-lg mx-auto">
+            Neúčtuji paušál za věci, které neděláš. Domluvíme se na spolupráci, která odpovídá tvé firmě.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6 items-start">
+          {plans.map((plan, i) => (
+            <FadeIn key={plan.name} delay={i * 0.1}>
+              <div
+                className={`card-warm p-8 h-full ${
+                  plan.highlight
+                    ? "border-2 border-[var(--gold)] md:scale-[1.03] relative"
+                    : ""
+                }`}
+              >
+                {plan.highlight && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-[10px] uppercase tracking-widest bg-[var(--gold)] text-[var(--ink)] rounded-full font-medium">
+                    Nejčastější volba
+                  </span>
+                )}
+                <p className="label-sm mb-2">{plan.name}</p>
+                <p className="display text-3xl md:text-4xl gold-grad mb-2">
+                  {plan.price.includes("od") ? (
+                    <><span className="text-lg not-italic">od </span>{plan.price.replace("od ", "")} Kč<span className="text-lg not-italic"> / měs.</span></>
+                  ) : (
+                    plan.price
+                  )}
+                </p>
+                <p className="text-sm text-[var(--ink-soft)] mb-6">{plan.desc}</p>
+
+                <ul className="space-y-2.5 mb-8">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm">
+                      <CheckCircle className="w-4 h-4 text-[var(--gold-dark)] mt-0.5 shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="#kontakt"
+                  className={`w-full justify-center ${plan.highlight ? "btn-gold" : "btn-soft"}`}
+                >
+                  {plan.name === "Na míru" ? "Domluvit kafíčko" : "Chci tohle"}
+                </a>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+
+        <p className="text-center text-xs text-[var(--ink-soft)] mt-8">
+          Ceny jsou orientační bez DPH. Přesnou nabídku ti dám po prvním kafíčku.
+        </p>
       </div>
     </section>
   );
@@ -178,10 +298,10 @@ function Services() {
    Process
    ============================================ */
 const steps = [
-  { num: "01", title: "Kafíčko", desc: "Potkáme se (osobně nebo online), probereme tvoje potřeby a já ti řeknu, jak to bude fungovat.", icon: Coffee },
+  { num: "01", title: "Kafíčko", desc: "Potkáme se — osobně nebo online. Půl hoďky, zdarma. Povíš mi, co máš, já ti řeknu, jak to bude fungovat.", icon: Coffee },
   { num: "02", title: "Nastavíme systém", desc: "Založím ti sdílenou složku, napojím se na banku, domluvíme jak posílat doklady.", icon: FolderOpen },
   { num: "03", title: "Běžíme", desc: "Každý měsíc zpracuji účetnictví, podám přiznání, pošlu ti report. Ty máš klid.", icon: CheckCircle2 },
-  { num: "04", title: "Průběžný servis", desc: "Pravidelná kafíčka, rychlé odpovědi na dotazy, proaktivní upozornění na termíny.", icon: Shield },
+  { num: "04", title: "Jsem dostupná", desc: "Pravidelná kafíčka, rychlé odpovědi, proaktivní upozornění na termíny. Nemusíš na nic myslet.", icon: Shield },
 ];
 
 function Process() {
@@ -189,9 +309,7 @@ function Process() {
     <section id="proces" className="py-20 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold-dark)] mb-3">
-            Bez stresu, krok za krokem
-          </p>
+          <p className="label-sm mb-3">Bez stresu, krok za krokem</p>
           <h2 className="display text-3xl md:text-5xl">Jak to chodí</h2>
         </div>
 
@@ -212,6 +330,63 @@ function Process() {
             </FadeIn>
           ))}
         </div>
+
+        <div className="text-center mt-10">
+          <a href="#kontakt" className="btn-gold">
+            Začneme prvním kafíčkem <Coffee className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================
+   Dark Island — Testimonials
+   ============================================ */
+const testimonials = [
+  {
+    quote: "Konečně vím, kde jsem. Každý měsíc dostanu report, rozumím mu a nemusím nic hlídat.",
+    name: "Martin K.",
+    role: "e-shop, s.r.o.",
+  },
+  {
+    quote: "Bála jsem se daňového přiznání každý rok. Libuše mi jednou vysvětlila, co a proč, a od té doby mi to vlastně dává smysl.",
+    name: "Petra V.",
+    role: "grafička, OSVČ",
+  },
+  {
+    quote: "Přešli jsme od velké účetní firmy. Tady odpověď přijde za hodinu, ne za dny.",
+    name: "Jakub M.",
+    role: "IT konzultant, 3 zaměstnanci",
+  },
+];
+
+function Testimonials() {
+  return (
+    <section className="py-28 px-6" style={{ background: "oklch(0.215 0.030 55)" }}>
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-14">
+          <p className="text-xs uppercase tracking-[0.15em] text-[var(--gold)] mb-3">Říkají o mně</p>
+          <h2 className="display text-3xl md:text-5xl text-[var(--cream)]">Co říkají klienti</h2>
+        </div>
+
+        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 md:grid md:grid-cols-3 md:overflow-visible md:mx-0 md:px-0">
+          {testimonials.map((t, i) => (
+            <FadeIn key={t.name} delay={i * 0.1} className="min-w-[300px] snap-start md:min-w-0 flex-shrink-0">
+              <div className="bg-[var(--gold)]/5 border border-[var(--gold)]/15 rounded-2xl p-8 h-full">
+                <Quote className="w-8 h-8 text-[var(--gold)]/40 mb-4" aria-hidden="true" />
+                <p className="text-[var(--cream)] leading-relaxed mb-6">
+                  "{t.quote}"
+                </p>
+                <div>
+                  <p className="text-sm font-medium text-[var(--cream)]">{t.name}</p>
+                  <p className="text-xs text-[var(--sand)]">{t.role}</p>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -222,43 +397,57 @@ function Process() {
    ============================================ */
 function About() {
   return (
-    <section id="o-mne" className="py-20 px-6 scroll-mt-24">
+    <section id="o-mne" className="py-28 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
-        <div className="card-warm p-8 md:p-12 grid md:grid-cols-5 gap-8 items-center">
-          <div className="md:col-span-2 flex justify-center">
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-3xl overflow-hidden border-2 border-[var(--gold)]/20">
-              <Image
-                src={logoUrl}
-                alt="Libuše Stuňová"
-                width={224}
-                height={224}
-                sizes="(max-width: 768px) 192px, 224px"
-                className="w-full h-full object-cover"
-              />
+        <div className="card-warm p-8 md:p-12 grid md:grid-cols-2 gap-12 items-center">
+          <div className="flex justify-center">
+            <div className="w-48 h-64 md:w-full md:h-72 rounded-3xl overflow-hidden border-2 border-[var(--gold)]/20 bg-gradient-to-br from-[var(--cream)] to-[var(--sand)] flex items-center justify-center">
+              <span className="display text-7xl gold-grad">LS</span>
             </div>
           </div>
-          <div className="md:col-span-3">
-            <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold-dark)] mb-3">O mně</p>
+          <div>
+            <p className="label-sm mb-3">O mně</p>
             <h2 className="display text-3xl md:text-4xl mb-4">Libuše Stuňová</h2>
             <p className="text-[var(--ink-soft)] leading-relaxed mb-4">
-              Účetnictví dělám přes 14 let. Začínala jsem v korporátu, ale zjistila jsem, že mě baví pracovat s malými firmami a OSVČ, kde vidím přímý dopad své práce.
+              Účetnictví dělám přes 14 let. Začínala jsem v korporátu, ale zjistila jsem, že mě baví pracovat s malými firmami a OSVČ — kde vidím přímý dopad své práce a kde se lidi nebojí zeptat „a proč?".
             </p>
             <p className="text-[var(--ink-soft)] leading-relaxed mb-6">
-              Sídlím v Praze 4 (Nusle), ale většinu agendy řeším online. Potkáváme se na kafíčku jednou měsíčně — a pokud potřebuješ něco rychle, stačí napsat.
+              Sídlím v Praze 4 (Nusle). Většinu agendy řeším online, na kafíčku se potkáváme jednou měsíčně. A pokud potřebuješ něco rychle — stačí napsat, odpovím do 24 hodin.
             </p>
             <div className="flex flex-wrap gap-3">
-              <span className="text-xs px-3 py-2 rounded-full bg-[var(--cream)] border border-[var(--gold)]/15 text-[var(--ink-soft)]">
-                <Clock className="w-3 h-3 inline mr-1" /> Odpovídám do 24h
-              </span>
-              <span className="text-xs px-3 py-2 rounded-full bg-[var(--cream)] border border-[var(--gold)]/15 text-[var(--ink-soft)]">
-                <Shield className="w-3 h-3 inline mr-1" /> 14+ let praxe
-              </span>
-              <span className="text-xs px-3 py-2 rounded-full bg-[var(--cream)] border border-[var(--gold)]/15 text-[var(--ink-soft)]">
-                <Users className="w-3 h-3 inline mr-1" /> 23 aktivních klientů
-              </span>
+              {[
+                { icon: Clock, text: "Odpovídám do 24h" },
+                { icon: Shield, text: "14+ let praxe" },
+                { icon: Users, text: "23 spokojených klientů" },
+              ].map((tag) => (
+                <span
+                  key={tag.text}
+                  className="text-xs px-3 py-2 rounded-full bg-[var(--cream)] border border-[var(--gold)]/15 text-[var(--ink-soft)]"
+                >
+                  <tag.icon className="w-3 h-3 inline mr-1" aria-hidden="true" /> {tag.text}
+                </span>
+              ))}
             </div>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================
+   FAQ Section
+   ============================================ */
+function FAQSection() {
+  return (
+    <section id="faq" className="py-24 px-6 scroll-mt-24">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-14">
+          <p className="label-sm mb-3">Časté dotazy</p>
+          <h2 className="display text-3xl md:text-5xl">Máš otázky? To je dobře.</h2>
+          <p className="text-[var(--ink-soft)] mt-4">Tady jsou ty nejčastější. Nezodpovězené? Napiš mi.</p>
+        </div>
+        <FAQ />
       </div>
     </section>
   );
@@ -275,10 +464,10 @@ const channels = [
 
 function ClientZone() {
   return (
-    <section id="klientska-zona" className="py-20 px-6 scroll-mt-24">
+    <section id="klientska-zona" className="py-24 px-6 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold-dark)] mb-3">Jak mi posíláš doklady</p>
+          <p className="label-sm mb-3">Jak mi posíláš doklady</p>
           <h2 className="display text-3xl md:text-5xl">Klientská zóna</h2>
         </div>
 
@@ -305,7 +494,28 @@ function ClientZone() {
 }
 
 /* ============================================
-   Contact (wrapper around client ContactForm)
+   Mid-page CTA Banner
+   ============================================ */
+function CTABanner() {
+  return (
+    <section className="py-16 px-6" style={{ background: "var(--deep-brown)" }}>
+      <div className="max-w-3xl mx-auto text-center">
+        <h2 className="display text-2xl md:text-4xl text-[var(--cream)] mb-4">
+          Chceš taky být v klidu?
+        </h2>
+        <p className="text-[var(--sand)] mb-8">
+          Zbývá pár volných míst. Napiš mi a domluvíme první kafíčko — zdarma, nezávazně.
+        </p>
+        <a href="#kontakt" className="btn-gold">
+          Domluvit kafíčko <Coffee className="w-4 h-4" />
+        </a>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================
+   Contact
    ============================================ */
 function Contact() {
   return (
@@ -318,7 +528,7 @@ function Contact() {
     >
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold-light)] mb-3">Pojďme se potkat</p>
+          <p className="text-xs uppercase tracking-[0.15em] text-[var(--gold-light)] mb-3">Pojďme se potkat</p>
           <h2 className="display text-3xl md:text-5xl text-[var(--cream)] mb-6">Domluvíme si kafíčko?</h2>
           <p className="text-[var(--sand)] max-w-lg mx-auto">
             Vyplň formulář nebo napiš přímo. Ozveme se do 24 hodin a domluvíme první schůzku — nezávazně, bez poplatků.
@@ -365,18 +575,24 @@ export default function Page() {
       <SiteNav />
       <main>
         <Hero />
+        <TrustBar />
         <div className="hairline-x max-w-4xl mx-auto" />
         <Services />
         <div className="hairline-x max-w-4xl mx-auto" />
-        <Process />
+        <Pricing />
         <div className="hairline-x max-w-4xl mx-auto" />
+        <Process />
+        <Testimonials />
         <About />
         <div className="hairline-x max-w-4xl mx-auto" />
+        <FAQSection />
         <ClientZone />
+        <CTABanner />
         <Contact />
       </main>
       <SiteFooter />
       <CookieConsent />
+      <MobileCTA />
     </>
   );
 }

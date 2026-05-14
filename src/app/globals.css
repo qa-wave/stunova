@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================
-   Stunova · Warm Gold Design System
+   Stunova · Warm Gold Design System v2
    Paleta v oklch — referenční tokeny
    ============================================ */
 
@@ -22,10 +22,16 @@
   --gold-dark: oklch(0.566 0.082 67.5);
   --cream: oklch(0.955 0.025 85);
   --sand: oklch(0.905 0.035 82);
+  --deep-brown: oklch(0.35 0.055 55);
+
+  /* Status colors — warm variants */
+  --status-ok: oklch(0.55 0.12 145);
+  --status-warn: oklch(0.72 0.12 75);
+  --status-alert: oklch(0.55 0.12 30);
 
   /* Semantic */
-  --card-bg: oklch(0.985 0.012 85);
-  --ring-gold: oklch(0.762 0.094 80.5 / 0.15);
+  --card-bg: oklch(0.993 0.006 85);
+  --ring-gold: oklch(0.762 0.094 80.5 / 0.18);
   --shadow-gold: oklch(0.566 0.082 67.5 / 0.08);
 
   /* Fonts */
@@ -50,16 +56,30 @@
     position: relative;
   }
 
+  /* Radial gradient background */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: -2;
     pointer-events: none;
     will-change: transform;
     background:
       radial-gradient(ellipse 80% 60% at 20% 10%, oklch(0.945 0.035 82 / 0.6) 0%, transparent 60%),
       radial-gradient(ellipse 60% 50% at 85% 85%, oklch(0.905 0.035 82 / 0.4) 0%, transparent 60%);
+  }
+
+  /* Paper noise texture */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
   }
 
   ::selection {
@@ -91,6 +111,14 @@
   color: transparent;
 }
 
+.label-sm {
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold-dark);
+}
+
 /* ============================================
    Card & Button Components
    ============================================ */
@@ -101,14 +129,14 @@
   box-shadow:
     0 4px 24px var(--shadow-gold),
     0 1px 4px oklch(0 0 0 / 0.03);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 }
 @media (hover: hover) {
   .card-warm:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow:
-      0 8px 32px var(--shadow-gold),
-      0 2px 8px oklch(0 0 0 / 0.05);
+      0 16px 48px oklch(0.566 0.082 67.5 / 0.14),
+      0 4px 12px oklch(0 0 0 / 0.06);
   }
 }
 
@@ -120,16 +148,20 @@
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--ink);
+  color: oklch(0.18 0.030 52);
   background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
   box-shadow: 0 2px 12px oklch(0.762 0.094 80.5 / 0.3);
   transition: all 0.2s;
 }
-.btn-gold:hover,
-.btn-gold-hover {
+.btn-gold:hover {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
   box-shadow: 0 4px 20px oklch(0.762 0.094 80.5 / 0.4);
   transform: translateY(-1px);
+}
+.btn-gold:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 8px oklch(0.762 0.094 80.5 / 0.2);
+  transition-duration: 0.05s;
 }
 
 .btn-soft {
@@ -142,14 +174,17 @@
   font-weight: 500;
   color: var(--ink-soft);
   background: var(--cream);
-  border: 1px solid oklch(0.762 0.094 80.5 / 0.2);
+  border: 1px solid oklch(0.762 0.094 80.5 / 0.35);
   transition: all 0.2s;
 }
-.btn-soft:hover,
-.btn-soft-hover {
+.btn-soft:hover {
   background: var(--sand);
-  border-color: oklch(0.762 0.094 80.5 / 0.4);
+  border-color: oklch(0.762 0.094 80.5 / 0.5);
   color: var(--ink);
+}
+.btn-soft:active {
+  transform: translateY(1px);
+  transition-duration: 0.05s;
 }
 
 /* ============================================
@@ -183,48 +218,30 @@
    Animations
    ============================================ */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulseDot {
   0%, 100% {
-    opacity: 1;
+    box-shadow: 0 0 0 0 oklch(0.762 0.094 80.5 / 0.5);
     transform: scale(1);
   }
   50% {
-    opacity: 0.6;
-    transform: scale(1.3);
+    box-shadow: 0 0 0 5px oklch(0.762 0.094 80.5 / 0);
+    transform: scale(1.1);
   }
 }
 
-.fade-up {
-  animation: fadeUp 0.8s ease-out both;
-}
-.fade-up-1 {
-  animation: fadeUp 0.8s ease-out 0.1s both;
-}
-.fade-up-2 {
-  animation: fadeUp 0.8s ease-out 0.2s both;
-}
-.fade-up-3 {
-  animation: fadeUp 0.8s ease-out 0.3s both;
-}
-.fade-up-4 {
-  animation: fadeUp 0.8s ease-out 0.4s both;
-}
-.fade-up-5 {
-  animation: fadeUp 0.8s ease-out 0.5s both;
-}
+.fade-up { animation: fadeUp 0.8s ease-out both; }
+.fade-up-1 { animation: fadeUp 0.8s ease-out 0.1s both; }
+.fade-up-2 { animation: fadeUp 0.8s ease-out 0.2s both; }
+.fade-up-3 { animation: fadeUp 0.8s ease-out 0.3s both; }
+.fade-up-4 { animation: fadeUp 0.8s ease-out 0.4s both; }
+.fade-up-5 { animation: fadeUp 0.8s ease-out 0.5s both; }
 
 /* ============================================
-   Variant: Warm (preserved for portal/admin)
+   Variant: Warm (portal/admin)
    ============================================ */
 .variant-warm {
   background:
@@ -283,38 +300,24 @@
    Print styles — faktury
    ============================================ */
 @media print {
-  body,
-  body::before {
+  body, body::before, body::after {
     background: white !important;
   }
 
-  nav,
-  aside,
-  .btn-gold,
-  .btn-soft,
-  footer,
-  [aria-label*="mobilní"] {
+  nav, aside, .btn-gold, .btn-soft, footer, [aria-label*="mobilní"] {
     display: none !important;
   }
 
-  main {
-    padding: 0 !important;
-  }
+  main { padding: 0 !important; }
 
-  .card-warm,
-  .bg-white\/70 {
+  .card-warm, .bg-white\/70 {
     background: white !important;
     box-shadow: none !important;
     border-color: #ddd !important;
   }
 
-  table {
-    font-size: 11px !important;
-  }
-
-  .display {
-    font-style: normal !important;
-  }
+  table { font-size: 11px !important; }
+  .display { font-style: normal !important; }
 
   .gold-grad {
     background: none !important;
@@ -322,11 +325,6 @@
     -webkit-text-fill-color: var(--ink) !important;
   }
 
-  a[href]::after {
-    content: none !important;
-  }
-
-  @page {
-    margin: 1.5cm;
-  }
+  a[href]::after { content: none !important; }
+  @page { margin: 1.5cm; }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -9,6 +9,7 @@ const logoUrl = "/stunova-logo.jpg";
 
 const navLinks = [
   ["Služby", "#sluzby"],
+  ["Ceník", "#cenik"],
   ["Jak to chodí", "#proces"],
   ["O mně", "#o-mne"],
   ["Kontakt", "#kontakt"],
@@ -16,11 +17,22 @@ const navLinks = [
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <nav
       aria-label="Hlavní navigace"
-      className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[var(--background)]/80 border-b border-[var(--gold)]/10"
+      className={`fixed top-0 inset-x-0 z-50 backdrop-blur-xl border-b transition-shadow duration-300 ${
+        scrolled
+          ? "bg-[var(--background)]/90 border-[var(--gold)]/15 shadow-lg shadow-[var(--gold)]/5"
+          : "bg-[var(--background)]/80 border-[var(--gold)]/10"
+      }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
@@ -39,7 +51,6 @@ export function SiteNav() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1 bg-[var(--cream)] rounded-full px-2 py-1.5 border border-[var(--gold)]/15">
           {navLinks.map(([label, href]) => (
             <a
@@ -56,8 +67,6 @@ export function SiteNav() {
           <Link href="/prihlaseni" className="btn-soft text-xs py-2.5 px-4">
             Přihlášení
           </Link>
-
-          {/* Mobile hamburger — min 44px touch target */}
           <button
             type="button"
             onClick={() => setOpen(!open)}
@@ -70,7 +79,6 @@ export function SiteNav() {
         </div>
       </div>
 
-      {/* Mobile menu with overlay */}
       {open && (
         <>
           <div

@@ -7,11 +7,17 @@ export const metadata: Metadata = {
 };
 
 export default function AdminDashboard() {
+  const now = new Date();
+  const dayName = now.toLocaleDateString('cs-CZ', { weekday: 'long' });
+  const dayMonth = now.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long' });
+  const time = now.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
+  const dateStr = `${dayName.charAt(0).toUpperCase() + dayName.slice(1)} · ${dayMonth} · ${time}`;
+
   return (
     <div className="max-w-6xl">
       <div className="mb-10">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
-          Pátek · 9. května · 7:42
+          {dateStr}
         </p>
         <h1 className="display text-4xl md:text-5xl mb-3">
           Dobré ráno, <span className="gold-grad italic">Libuš</span>.
@@ -47,7 +53,7 @@ export default function AdminDashboard() {
         {/* Today */}
         <div className="md:col-span-2 bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-8 shadow-md shadow-[var(--gold)]/5">
           <div className="flex items-baseline justify-between mb-6">
-            <h3 className="display text-2xl">Dnešní kafíčka ☕</h3>
+            <h3 className="display text-2xl">Dnešní kafíčka <span aria-hidden="true">☕</span></h3>
             <Link
               href="/admin/schuzky"
               className="text-xs text-[var(--gold-dark)] hover:text-[var(--ink)]"

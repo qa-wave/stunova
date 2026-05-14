@@ -83,11 +83,12 @@ export default function PortalFaktury() {
       {/* Table */}
       <div className="bg-white/70 backdrop-blur-xl border border-white rounded-2xl overflow-hidden shadow-md shadow-[var(--gold)]/5">
         <div className="overflow-x-auto">
-        <table className="w-full text-sm min-w-[640px]">
+        <table className="w-full text-sm min-w-[640px]" aria-label="Přehled faktur">
           <thead className="text-[10px] uppercase tracking-widest text-[var(--gold-dark)] border-b border-[var(--gold)]/20">
             <tr>
               <th className="text-left px-6 py-4">Číslo</th>
               <th className="text-left px-6 py-4">Vystaveno</th>
+              <th className="text-left px-6 py-4">Splatnost</th>
               <th className="text-left px-6 py-4">Položka</th>
               <th className="text-right px-6 py-4">Částka</th>
               <th className="text-left px-6 py-4">Stav</th>
@@ -102,6 +103,7 @@ export default function PortalFaktury() {
               >
                 <td className="px-6 py-4 font-medium">{f.cislo}</td>
                 <td className="px-6 py-4 text-[var(--ink-soft)]">{f.datum}</td>
+                <td className="px-6 py-4 text-[var(--ink-soft)]">{f.splatnost}</td>
                 <td className="px-6 py-4">{f.polozka}</td>
                 <td className="px-6 py-4 text-right">{f.castka}</td>
                 <td className="px-6 py-4">

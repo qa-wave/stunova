@@ -81,7 +81,7 @@ export default function AdminSchuzky() {
       <div className="flex items-baseline justify-between mb-8 flex-wrap gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
-            Týdenní výhled · 8 kafíček ☕
+            Týdenní výhled · 8 kafíček <span aria-hidden="true">☕</span>
           </p>
           <h1 className="display text-4xl md:text-5xl">Kalendář</h1>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, Send } from "lucide-react";
+import { Mail, Phone, Send, Coffee } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
 
 export function ContactForm() {
@@ -36,20 +36,19 @@ export function ContactForm() {
 
   return (
     <div className="grid md:grid-cols-2 gap-10 items-start">
-      {/* Form */}
       <FadeIn>
         {sent ? (
           <div className="bg-[var(--gold)]/10 border border-[var(--gold)]/30 rounded-2xl p-8 text-center">
-            <p className="display text-2xl text-[var(--cream)] mb-2">Děkuji!</p>
+            <p className="display text-2xl text-[var(--cream)] mb-2">Dorazilo, díky!</p>
             <p className="text-[var(--sand)] text-sm">
-              Ozvu se ti do 24 hodin. Těším se na kafíčko.
+              Ozvu se ti do 24 hodin — a domluvíme první kafíčko.
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs uppercase tracking-widest text-[var(--gold-light)] mb-2">
-                Jméno
+                Jak se jmenuješ?
               </label>
               <input
                 name="name"
@@ -61,7 +60,7 @@ export function ContactForm() {
             </div>
             <div>
               <label className="block text-xs uppercase tracking-widest text-[var(--gold-light)] mb-2">
-                E-mail
+                Tvůj e-mail
               </label>
               <input
                 name="email"
@@ -73,13 +72,13 @@ export function ContactForm() {
             </div>
             <div>
               <label className="block text-xs uppercase tracking-widest text-[var(--gold-light)] mb-2">
-                Zpráva
+                Co tě přivedlo?
               </label>
               <textarea
                 name="message"
                 required
                 rows={4}
-                placeholder="Chtěl bych probrat účetnictví pro mou s.r.o.…"
+                placeholder="Napiš pár vět — s.r.o., OSVČ, kolik zaměstnanců, co tě trápí."
                 className="w-full bg-[var(--gold)]/5 border border-[var(--gold)]/20 rounded-xl px-4 py-3 text-base text-[var(--cream)] placeholder:text-[var(--sand)]/50 focus:outline-none focus:border-[var(--gold)] transition resize-none"
               />
             </div>
@@ -88,19 +87,18 @@ export function ContactForm() {
               disabled={sending}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium bg-[var(--gold)] text-[var(--ink)] hover:bg-[var(--gold-light)] transition disabled:opacity-60"
             >
-              <Send className="w-4 h-4" />
-              {sending ? "Odesílám…" : "Odeslat zprávu"}
+              <Coffee className="w-4 h-4" />
+              {sending ? "Posílám…" : "Domluvit kafíčko"}
             </button>
           </form>
         )}
       </FadeIn>
 
-      {/* Direct contact */}
       <FadeIn delay={0.15}>
         <div className="space-y-6">
           <div>
             <p className="text-xs uppercase tracking-widest text-[var(--gold-light)] mb-3">
-              Nebo přímo
+              Nebo napiš přímo
             </p>
             <a
               href="mailto:libuse@stunova.cz"
@@ -117,12 +115,10 @@ export function ContactForm() {
               <span>+420 728 ••• •••</span>
             </a>
           </div>
-
           <div className="hairline-x opacity-30" />
-
           <div>
             <p className="text-xs uppercase tracking-widest text-[var(--gold-light)] mb-3">
-              Kde se potkáme
+              Kde se setkáme
             </p>
             <p className="text-sm text-[var(--sand)]">
               Praha 4 · Nusle<br />
@@ -130,6 +126,10 @@ export function ContactForm() {
               Po–Pá 9:00–17:00
             </p>
           </div>
+          <div className="hairline-x opacity-30" />
+          <p className="text-xs text-[var(--sand)]/60">
+            Odpovím do 24 hodin v pracovní dny. Garantuji.
+          </p>
         </div>
       </FadeIn>
     </div>

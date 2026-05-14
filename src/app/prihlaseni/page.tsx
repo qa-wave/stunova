@@ -25,7 +25,7 @@ export default function LoginPage() {
           />
 
           <div className="text-center mb-8">
-            <div className="text-3xl mb-3">☕</div>
+            <div className="text-3xl mb-3" aria-hidden="true">☕</div>
             <h1 className="display text-4xl mb-2">Vítej zpět</h1>
             <p className="text-sm text-[var(--ink-soft)]">Tvoje účetnictví, faktury a dokumenty na jednom místě.</p>
           </div>
@@ -83,7 +83,7 @@ export default function LoginPage() {
           <p className="mt-6 text-center text-xs text-[var(--ink-soft)]">
             Ještě nejsme spolu?{" "}
             <Link href="/#kontakt" className="text-[var(--gold-dark)] hover:text-[var(--ink)] underline underline-offset-4">
-              Domluvíme si kafíčko ☕
+              Domluvíme si kafíčko <span aria-hidden="true">☕</span>
             </Link>
           </p>
         </div>
