@@ -5,15 +5,12 @@ import "./globals.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
   variable: "--font-fraunces",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   variable: "--font-inter",
   display: "swap",
 });

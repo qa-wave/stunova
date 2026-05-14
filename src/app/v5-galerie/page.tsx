@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Logo, LogoHero } from "@/components/Logo";
 
 export const metadata: Metadata = {
-  title: "Účetnictví pro malé firmy",
+  title: "Účetnictví pro malé firmy · Galerie",
   description:
     "Účetní jako parťák, ne jen servis ke konci roku. Praha 4. Domluvíme si kafíčko.",
   openGraph: {
