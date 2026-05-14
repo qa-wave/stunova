@@ -12,26 +12,19 @@ const isPublicRoute = createRouteMatcher([
   "/robots.txt",
 ]);
 
-/**
- * Auth middleware — graceful degradation.
- * If CLERK_SECRET_KEY is not set, skip auth entirely (dev/preview mode).
- */
-const hasClerkKeys = !!(
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-  process.env.CLERK_SECRET_KEY
-);
-
-function noAuthMiddleware(request: NextRequest) {
-  return NextResponse.next();
-}
-
-const authMiddleware = clerkMiddleware(async (auth, request) => {
+const clerkHandler = clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
 });
 
-export default hasClerkKeys ? authMiddleware : noAuthMiddleware;
+export default function middleware(request: NextRequest, event: any) {
+  // Without Clerk secrets, skip auth entirely (demo mode)
+  if (!process.env.CLERK_SECRET_KEY) {
+    return NextResponse.next();
+  }
+  return clerkHandler(request, event);
+}
 
 export const config = {
   matcher: [
