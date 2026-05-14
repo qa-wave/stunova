@@ -2,23 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { UserButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { Logo } from "@/components/Logo";
 import { LayoutDashboard, Users, Calendar, Receipt, LogOut } from "lucide-react";
 
 const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
-let useUser: () => { user: any } = () => ({ user: null });
-let UserButton: any = () => null;
-let SignOutButton: any = ({ children }: { children: any; redirectUrl?: string }) => children;
-
-if (hasClerk) {
-  try {
-    const clerk = require("@clerk/nextjs");
-    useUser = clerk.useUser;
-    UserButton = clerk.UserButton;
-    SignOutButton = clerk.SignOutButton;
-  } catch {}
-}
 
 const navItems = [
   { href: "/admin", label: "Přehled", icon: LayoutDashboard },
@@ -27,46 +15,36 @@ const navItems = [
   { href: "/admin/faktury", label: "Fakturace", icon: Receipt },
 ];
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function UserInfo() {
+  if (!hasClerk) return { name: "Libuše" };
+  try {
+    const { user } = useUser();
+    return { name: user?.firstName || "Libuše" };
+  } catch {
+    return { name: "Libuše" };
+  }
+}
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { user } = useUser();
+  const { name: displayName } = UserInfo();
 
   const isActive = (href: string) =>
     href === "/admin" ? pathname === "/admin" : pathname.startsWith(href);
-
-  const displayName = user?.firstName || "Libuše";
 
   return (
     <div className="variant-warm min-h-screen flex">
       <aside className="hidden md:flex w-64 flex-col border-r border-[var(--gold)]/30 bg-[var(--ink)]/95 text-[var(--cream)]">
         <div className="p-6 border-b border-[var(--gold)]/30">
-          <Link href="/">
-            <Logo size="md" tone="light" />
-          </Link>
-          <p className="text-[10px] uppercase tracking-widest text-[var(--gold)] mt-3">
-            Admin · Libuše
-          </p>
+          <Link href="/"><Logo size="md" tone="light" /></Link>
+          <p className="text-[10px] uppercase tracking-widest text-[var(--gold)] mt-3">Admin · Libuše</p>
         </div>
 
         <nav aria-label="Admin" className="flex-1 p-4 space-y-1">
           {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition ${
-                isActive(item.href)
-                  ? "bg-[var(--gold)]/15 font-medium text-[var(--cream)]"
-                  : "hover:bg-[var(--gold)]/10"
-              }`}
-            >
-              <item.icon
-                className={`w-4 h-4 ${isActive(item.href) ? "text-[var(--gold-light)]" : "text-[var(--gold)]"}`}
-              />
+            <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition ${isActive(item.href) ? "bg-[var(--gold)]/15 font-medium text-[var(--cream)]" : "hover:bg-[var(--gold)]/10"}`}>
+              <item.icon className={`w-4 h-4 ${isActive(item.href) ? "text-[var(--gold-light)]" : "text-[var(--gold)]"}`} />
               {item.label}
             </Link>
           ))}
@@ -77,26 +55,18 @@ export default function AdminLayout({
             {hasClerk ? (
               <UserButton appearance={{ elements: { avatarBox: "size-9" } }} />
             ) : (
-              <div className="size-9 rounded-full flex items-center justify-center text-[var(--ink)] text-sm font-medium bg-[var(--gold-light)]">
-                LS
-              </div>
+              <div className="size-9 rounded-full flex items-center justify-center text-[var(--ink)] text-sm font-medium bg-[var(--gold-light)]">LS</div>
             )}
             <div className="flex-1 min-w-0">
               <p className="text-sm truncate">{displayName}</p>
-              <p className="text-[10px] text-[var(--gold)] truncate">
-                Účetní · admin
-              </p>
+              <p className="text-[10px] text-[var(--gold)] truncate">Účetní · admin</p>
             </div>
             {hasClerk ? (
               <SignOutButton redirectUrl="/prihlaseni">
-                <button className="text-[var(--gold)] hover:text-[var(--cream)] transition" title="Odhlásit">
-                  <LogOut className="w-4 h-4" />
-                </button>
+                <button className="text-[var(--gold)] hover:text-[var(--cream)] transition" title="Odhlásit"><LogOut className="w-4 h-4" /></button>
               </SignOutButton>
             ) : (
-              <Link href="/prihlaseni" className="text-[var(--gold)] hover:text-[var(--cream)] transition" title="Odhlásit">
-                <LogOut className="w-4 h-4" />
-              </Link>
+              <Link href="/prihlaseni" className="text-[var(--gold)] hover:text-[var(--cream)] transition" title="Odhlásit"><LogOut className="w-4 h-4" /></Link>
             )}
           </div>
         </div>
@@ -104,43 +74,18 @@ export default function AdminLayout({
 
       <main className="flex-1 min-w-0 flex flex-col">
         <div className="md:hidden flex items-center justify-between px-4 py-4 border-b border-[var(--gold)]/20 bg-[var(--ink)] text-[var(--cream)]">
-          <Link href="/admin">
-            <Logo size="xs" tone="light" />
+          <Link href="/admin"><Logo size="xs" tone="light" /></Link>
+          <Link href="/prihlaseni" className="flex items-center gap-1.5 text-xs text-[var(--gold)]">
+            <LogOut className="w-3.5 h-3.5" /> Odhlásit
           </Link>
-          <div className="flex items-center gap-3">
-            {hasClerk && <UserButton appearance={{ elements: { avatarBox: "size-7" } }} />}
-            {hasClerk ? (
-              <SignOutButton redirectUrl="/prihlaseni">
-                <button className="flex items-center gap-1.5 text-xs text-[var(--gold)]">
-                  <LogOut className="w-3.5 h-3.5" /> Odhlásit
-                </button>
-              </SignOutButton>
-            ) : (
-              <Link href="/prihlaseni" className="flex items-center gap-1.5 text-xs text-[var(--gold)]">
-                <LogOut className="w-3.5 h-3.5" /> Odhlásit
-              </Link>
-            )}
-          </div>
         </div>
 
         <div className="flex-1 p-6 md:p-10 pb-24 md:pb-10">{children}</div>
 
-        <nav
-          aria-label="Admin mobilní"
-          className="md:hidden fixed bottom-0 inset-x-0 bg-[var(--ink)]/95 backdrop-blur-xl border-t border-[var(--gold)]/30 flex z-50"
-          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-        >
+        <nav aria-label="Admin mobilní" className="md:hidden fixed bottom-0 inset-x-0 bg-[var(--ink)]/95 backdrop-blur-xl border-t border-[var(--gold)]/30 flex z-50" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
           {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className={`flex-1 flex flex-col items-center gap-1 py-3 text-[10px] transition ${
-                isActive(item.href)
-                  ? "text-[var(--cream)] font-medium"
-                  : "text-[var(--gold)]"
-              }`}
-            >
+            <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined}
+              className={`flex-1 flex flex-col items-center gap-1 py-3 text-[10px] transition ${isActive(item.href) ? "text-[var(--cream)] font-medium" : "text-[var(--gold)]"}`}>
               <item.icon className={`w-5 h-5 ${isActive(item.href) ? "text-[var(--gold-light)]" : ""}`} />
               {item.label}
             </Link>
