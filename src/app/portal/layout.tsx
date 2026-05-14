@@ -2,9 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useUser, UserButton, SignOutButton } from "@clerk/nextjs";
 import { Logo } from "@/components/Logo";
 import { LayoutDashboard, FileText, Receipt, Calendar, LogOut } from "lucide-react";
+
+const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+// Conditional Clerk imports — tree-shaken when not used
+let useUser: () => { user: any } = () => ({ user: null });
+let UserButton: any = () => null;
+let SignOutButton: any = ({ children }: { children: any; redirectUrl?: string }) => children;
+
+if (hasClerk) {
+  try {
+    const clerk = require("@clerk/nextjs");
+    useUser = clerk.useUser;
+    UserButton = clerk.UserButton;
+    SignOutButton = clerk.SignOutButton;
+  } catch {}
+}
 
 const navItems = [
   { href: "/portal", label: "Přehled", icon: LayoutDashboard },
@@ -63,27 +78,30 @@ export default function PortalLayout({
 
         <div className="p-4 border-t border-[var(--gold)]/20">
           <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--card-bg)]/60 backdrop-blur-sm">
-            <UserButton
-              appearance={{
-                elements: {
-                  avatarBox: "size-9",
-                },
-              }}
-            />
+            {hasClerk ? (
+              <UserButton appearance={{ elements: { avatarBox: "size-9" } }} />
+            ) : (
+              <div className="size-9 rounded-full flex items-center justify-center text-sm font-medium bg-[var(--gold)] text-[var(--ink)]">
+                {initials}
+              </div>
+            )}
             <div className="flex-1 min-w-0">
               <p className="text-sm truncate">{displayName}</p>
               <p className="text-[10px] text-[var(--gold-dark)] truncate">
                 Klientský portál
               </p>
             </div>
-            <SignOutButton redirectUrl="/prihlaseni">
-              <button
-                className="text-[var(--gold-dark)] hover:text-[var(--ink)] transition"
-                title="Odhlásit"
-              >
+            {hasClerk ? (
+              <SignOutButton redirectUrl="/prihlaseni">
+                <button className="text-[var(--gold-dark)] hover:text-[var(--ink)] transition" title="Odhlásit">
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </SignOutButton>
+            ) : (
+              <Link href="/prihlaseni" className="text-[var(--gold-dark)] hover:text-[var(--ink)] transition" title="Odhlásit">
                 <LogOut className="w-4 h-4" />
-              </button>
-            </SignOutButton>
+              </Link>
+            )}
           </div>
         </div>
       </aside>
@@ -94,18 +112,23 @@ export default function PortalLayout({
             <Logo size="xs" />
           </Link>
           <div className="flex items-center gap-3">
-            <UserButton appearance={{ elements: { avatarBox: "size-7" } }} />
-            <SignOutButton redirectUrl="/prihlaseni">
-              <button className="flex items-center gap-1.5 text-xs text-[var(--gold-dark)]">
+            {hasClerk && <UserButton appearance={{ elements: { avatarBox: "size-7" } }} />}
+            {hasClerk ? (
+              <SignOutButton redirectUrl="/prihlaseni">
+                <button className="flex items-center gap-1.5 text-xs text-[var(--gold-dark)]">
+                  <LogOut className="w-3.5 h-3.5" /> Odhlásit
+                </button>
+              </SignOutButton>
+            ) : (
+              <Link href="/prihlaseni" className="flex items-center gap-1.5 text-xs text-[var(--gold-dark)]">
                 <LogOut className="w-3.5 h-3.5" /> Odhlásit
-              </button>
-            </SignOutButton>
+              </Link>
+            )}
           </div>
         </div>
 
         <div className="flex-1 p-6 md:p-10 pb-24 md:pb-10">{children}</div>
 
-        {/* Mobile bottom nav */}
         <nav
           aria-label="Portál mobilní"
           className="md:hidden fixed bottom-0 inset-x-0 bg-[var(--card-bg)]/90 backdrop-blur-xl border-t border-[var(--gold)]/20 flex z-50"
@@ -122,9 +145,7 @@ export default function PortalLayout({
                   : "text-[var(--gold-dark)]"
               }`}
             >
-              <item.icon
-                className={`w-5 h-5 ${isActive(item.href) ? "text-[var(--gold)]" : ""}`}
-              />
+              <item.icon className={`w-5 h-5 ${isActive(item.href) ? "text-[var(--gold)]" : ""}`} />
               {item.label}
             </Link>
           ))}

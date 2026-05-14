@@ -1,4 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 const isPublicRoute = createRouteMatcher([
   "/",
@@ -10,11 +12,26 @@ const isPublicRoute = createRouteMatcher([
   "/robots.txt",
 ]);
 
-export default clerkMiddleware(async (auth, request) => {
+/**
+ * Auth middleware — graceful degradation.
+ * If CLERK_SECRET_KEY is not set, skip auth entirely (dev/preview mode).
+ */
+const hasClerkKeys = !!(
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+  process.env.CLERK_SECRET_KEY
+);
+
+function noAuthMiddleware(request: NextRequest) {
+  return NextResponse.next();
+}
+
+const authMiddleware = clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
 });
+
+export default hasClerkKeys ? authMiddleware : noAuthMiddleware;
 
 export const config = {
   matcher: [

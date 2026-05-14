@@ -1,8 +1,21 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { SignIn } from "@clerk/nextjs";
 import { Logo } from "@/components/Logo";
 
+const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+let SignIn: any = null;
+if (hasClerk) {
+  try {
+    SignIn = require("@clerk/nextjs").SignIn;
+  } catch {}
+}
+
 export default function LoginPage() {
+  const [mode, setMode] = useState<"klient" | "admin">("klient");
+
   return (
     <div className="min-h-screen flex flex-col">
       <nav className="px-6 md:px-12 py-6 flex items-center justify-between">
@@ -35,27 +48,78 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <div className="flex justify-center">
-            <SignIn
-              routing="hash"
-              fallbackRedirectUrl="/portal"
-              appearance={{
-                elements: {
-                  rootBox: "w-full",
-                  card: "shadow-none bg-transparent border-0 w-full",
-                  headerTitle: "hidden",
-                  headerSubtitle: "hidden",
-                  socialButtonsBlockButton:
-                    "rounded-full border-[var(--gold)]/20",
-                  formButtonPrimary:
-                    "rounded-full bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] text-[var(--ink)] hover:from-[var(--gold)] hover:to-[var(--gold-dark)]",
-                  formFieldInput:
-                    "rounded-xl border-[var(--gold)]/20 focus:border-[var(--gold)]",
-                  footerAction: "hidden",
-                },
-              }}
-            />
-          </div>
+          {hasClerk && SignIn ? (
+            <div className="flex justify-center">
+              <SignIn
+                routing="hash"
+                fallbackRedirectUrl="/portal"
+                appearance={{
+                  elements: {
+                    rootBox: "w-full",
+                    card: "shadow-none bg-transparent border-0 w-full",
+                    headerTitle: "hidden",
+                    headerSubtitle: "hidden",
+                    socialButtonsBlockButton: "rounded-full border-[var(--gold)]/20",
+                    formButtonPrimary: "rounded-full bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] text-[var(--ink)] hover:from-[var(--gold)] hover:to-[var(--gold-dark)]",
+                    formFieldInput: "rounded-xl border-[var(--gold)]/20 focus:border-[var(--gold)]",
+                    footerAction: "hidden",
+                  },
+                }}
+              />
+            </div>
+          ) : (
+            /* Fallback mock form — no auth */
+            <div className="bg-[var(--card-bg)] backdrop-blur-xl border border-[var(--ring-gold)] rounded-[2.5rem] p-10 shadow-2xl shadow-[var(--shadow-gold)]">
+              <p className="text-[10px] text-[var(--gold-dark)] mb-6 uppercase tracking-widest text-center">
+                Demo · bez hesla
+              </p>
+
+              <div className="grid grid-cols-2 gap-1 p-1 bg-[var(--cream)] rounded-full mb-8 border border-[var(--gold)]/20">
+                {(["klient", "admin"] as const).map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    onClick={() => setMode(m)}
+                    className={`py-2 text-sm rounded-full transition ${
+                      mode === m
+                        ? "bg-[var(--card-bg)] text-[var(--ink)] shadow-sm"
+                        : "text-[var(--ink-soft)] hover:text-[var(--ink)]"
+                    }`}
+                  >
+                    {m === "klient" ? "Klient" : "Libuše · admin"}
+                  </button>
+                ))}
+              </div>
+
+              <form className="space-y-4" action={mode === "klient" ? "/portal" : "/admin"}>
+                <div>
+                  <label className="block text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
+                    E-mail
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="ty@firma.cz"
+                    className="w-full bg-[var(--card-bg)] border border-[var(--gold)]/20 rounded-full px-5 py-3 text-sm focus:outline-none focus:border-[var(--gold)] transition"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-widest text-[var(--gold-dark)] mb-2">
+                    Heslo
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    placeholder="••••••••"
+                    className="w-full bg-[var(--card-bg)] border border-[var(--gold)]/20 rounded-full px-5 py-3 text-sm focus:outline-none focus:border-[var(--gold)] transition"
+                  />
+                </div>
+                <button type="submit" className="w-full btn-gold justify-center py-4">
+                  {mode === "klient" ? "Vstoupit do portálu" : "Otevřít admin"}
+                </button>
+              </form>
+            </div>
+          )}
 
           <p className="mt-6 text-center text-xs text-[var(--ink-soft)]">
             Ještě nejsme spolu?{" "}
