@@ -57,7 +57,7 @@ function Hero() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--cream)] border border-[var(--gold)]/20 mb-8">
             <span className="pulse-dot" />
             <span className="text-xs font-medium text-[var(--ink-soft)]">
-              Přijímám 2–3 nové klienty
+              Mám volnou kapacitu · Praha 4
             </span>
           </div>
 
@@ -84,7 +84,7 @@ function Hero() {
           <div className="flex justify-center gap-8 pt-8 border-t border-[var(--gold)]/15">
             {[
               { v: "14+", l: "let praxe" },
-              { v: "23", l: "spokojených klientů" },
+              { v: "23", l: "aktivních klientů" },
               { v: "0", l: "pokut od FÚ" },
             ].map((s) => (
               <div key={s.l} className="text-center">
@@ -105,7 +105,7 @@ function Hero() {
 function TrustBar() {
   const items = [
     "14+ let praxe",
-    "23 spokojených klientů",
+    "23 aktivních klientů",
     "Odpověď do 24 h",
     "Pojištění odpovědnosti",
     "GDPR v pořádku",
@@ -253,7 +253,7 @@ function Pricing() {
               >
                 {plan.highlight && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-[10px] uppercase tracking-widest bg-[var(--gold)] text-[var(--ink)] rounded-full font-medium">
-                    Nejčastější volba
+                    Nejoblíbenější
                   </span>
                 )}
                 <p className="label-sm mb-2">{plan.name}</p>
@@ -279,7 +279,7 @@ function Pricing() {
                   href="#kontakt"
                   className={`w-full justify-center ${plan.highlight ? "btn-gold" : "btn-soft"}`}
                 >
-                  {plan.name === "Na míru" ? "Domluvit kafíčko" : "Chci tohle"}
+                  {plan.name === "Na míru" ? "Domluvit kafíčko" : "Zjistit víc"}
                 </a>
               </div>
             </FadeIn>
@@ -367,8 +367,8 @@ function Testimonials() {
     <section className="py-28 px-6" style={{ background: "oklch(0.215 0.030 55)" }}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs uppercase tracking-[0.15em] text-[var(--gold)] mb-3">Říkají o mně</p>
-          <h2 className="display text-3xl md:text-5xl text-[var(--cream)]">Co říkají klienti</h2>
+          <p className="text-xs uppercase tracking-[0.15em] text-[var(--gold)] mb-3">Reference</p>
+          <h2 className="display text-3xl md:text-5xl text-[var(--cream)]">Slovo mých klientů</h2>
         </div>
 
         <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 md:grid md:grid-cols-3 md:overflow-visible md:mx-0 md:px-0">
@@ -418,7 +418,7 @@ function About() {
               {[
                 { icon: Clock, text: "Odpovídám do 24h" },
                 { icon: Shield, text: "14+ let praxe" },
-                { icon: Users, text: "23 spokojených klientů" },
+                { icon: Users, text: "23 aktivních klientů" },
               ].map((tag) => (
                 <span
                   key={tag.text}
@@ -501,10 +501,10 @@ function CTABanner() {
     <section className="py-16 px-6" style={{ background: "var(--deep-brown)" }}>
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="display text-2xl md:text-4xl text-[var(--cream)] mb-4">
-          Chceš taky být v klidu?
+          Tak co, dáme to kafíčko?
         </h2>
         <p className="text-[var(--sand)] mb-8">
-          Zbývá pár volných míst. Napiš mi a domluvíme první kafíčko — zdarma, nezávazně.
+          Půl hoďky, online nebo v Praze 4, zdarma. Povíš mi, co potřebuješ, a já ti řeknu, jak to bude fungovat.
         </p>
         <a href="#kontakt" className="btn-gold">
           Domluvit kafíčko <Coffee className="w-4 h-4" />
