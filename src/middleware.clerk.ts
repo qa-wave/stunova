@@ -1,0 +1,30 @@
+/**
+ * Clerk auth middleware — rename to middleware.ts when CLERK_SECRET_KEY is set.
+ *
+ * Protects /portal/* and /admin/* routes.
+ * Public routes: /, /v4-warm, /v5-galerie, /prihlaseni, /api/health
+ */
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/v4-warm",
+  "/v5-galerie",
+  "/prihlaseni(.*)",
+  "/api/health",
+  "/sitemap.xml",
+  "/robots.txt",
+]);
+
+export default clerkMiddleware(async (auth, request) => {
+  if (!isPublicRoute(request)) {
+    await auth.protect();
+  }
+});
+
+export const config = {
+  matcher: [
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+  ],
+};

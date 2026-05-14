@@ -1,34 +1,21 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const isPublicRoute = createRouteMatcher([
-  "/",
-  "/v4-warm",
-  "/v5-galerie",
-  "/prihlaseni(.*)",
-  "/api/health",
-  "/sitemap.xml",
-  "/robots.txt",
-]);
-
-const clerkHandler = clerkMiddleware(async (auth, request) => {
-  if (!isPublicRoute(request)) {
-    await auth.protect();
-  }
-});
-
-export default function middleware(request: NextRequest, event: any) {
-  // Without Clerk secrets, skip auth entirely (demo mode)
-  if (!process.env.CLERK_SECRET_KEY) {
-    return NextResponse.next();
-  }
-  return clerkHandler(request, event);
+/**
+ * Minimal middleware — Clerk auth is handled by AuthProvider at component level.
+ * When Clerk keys are configured, ClerkProvider handles session management.
+ * Middleware just passes through — no server-side auth guard (yet).
+ *
+ * To add server-side route protection:
+ * 1. Set CLERK_SECRET_KEY on Vercel
+ * 2. Replace this file with the Clerk middleware from middleware.clerk.ts
+ */
+export default function middleware(_request: NextRequest) {
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
   ],
 };
