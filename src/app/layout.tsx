@@ -90,8 +90,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="alternate" type="application/rss+xml" title="Blog · Libuše Stuňová" href="/api/rss" />
+        <meta name="theme-color" content="#c8a867" />
       </head>
       <body>
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[var(--gold)] focus:text-[var(--ink)] focus:text-sm">
+          Přeskočit na obsah
+        </a>
         <AuthProvider>{children}</AuthProvider>
         <Analytics />
       </body>

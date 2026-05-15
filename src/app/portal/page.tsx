@@ -14,6 +14,19 @@ export default function PortalDashboard() {
 
   return (
     <div className="max-w-5xl">
+      {/* Onboarding tip */}
+      <div className="mb-6 p-5 rounded-2xl bg-[var(--gold)]/8 border border-[var(--gold)]/20 flex items-start gap-4">
+        <span className="text-2xl shrink-0" aria-hidden="true">👋</span>
+        <div>
+          <p className="text-sm font-medium mb-1">Vítej v portálu!</p>
+          <p className="text-xs text-[var(--ink-soft)]">
+            Tady najdeš přehled svého účetnictví, dokumenty ke schválení, faktury a historii schůzek.
+            Pokud potřebuješ cokoliv — stačí napsat na{" "}
+            <a href="mailto:libuse@stunova.cz" className="text-[var(--gold-dark)] underline underline-offset-2">libuse@stunova.cz</a>.
+          </p>
+        </div>
+      </div>
+
       <div className="mb-10">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-dark)] mb-3">
           {dateStr}

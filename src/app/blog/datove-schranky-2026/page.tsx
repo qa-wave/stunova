@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { RelatedArticles } from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
   title: "Datové schránky v roce 2026: co se změnilo a co musíš vědět",
   description: "Od ledna 2023 mají datovky i OSVČ. Co to znamená a jak s tím pracovat?",
+  openGraph: {
+    images: [{ url: "/api/og?title=Datové schránky v roce 2026", width: 1200, height: 630 }],
+  },
 };
 
 export default function Article() {
@@ -67,6 +71,8 @@ export default function Article() {
             Domluvit kafíčko
           </Link>
         </div>
+
+        <RelatedArticles currentSlug="datove-schranky-2026" />
       </div>
     </article>
   );

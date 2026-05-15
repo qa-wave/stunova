@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { RelatedArticles } from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
   title: "Jak bezbolestně přejít k nové účetní",
   description: "Měníš účetní a bojíš se chaosu? Návod krok za krokem.",
+  openGraph: {
+    images: [{ url: "/api/og?title=Jak přejít k nové účetní", width: 1200, height: 630 }],
+  },
 };
 
 export default function Article() {
@@ -82,6 +86,8 @@ export default function Article() {
             Domluvit kafíčko
           </Link>
         </div>
+
+        <RelatedArticles currentSlug="prechod-k-nove-ucetni" />
       </div>
     </article>
   );

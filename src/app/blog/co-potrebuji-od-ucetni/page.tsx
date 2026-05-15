@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { RelatedArticles } from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
   title: "Co potřebuji od účetní? Průvodce pro OSVČ a malé firmy",
   description: "Nevíš, co od účetní čekat? Seznam věcí, které by měla řešit — a které ne.",
+  openGraph: {
+    images: [{ url: "/api/og?title=Co potřebuji od účetní?", width: 1200, height: 630 }],
+  },
 };
 
 export default function Article() {
@@ -78,6 +82,8 @@ export default function Article() {
             Domluvit kafíčko
           </Link>
         </div>
+
+        <RelatedArticles currentSlug="co-potrebuji-od-ucetni" />
       </div>
     </article>
   );

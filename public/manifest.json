@@ -1,0 +1,22 @@
+{
+  "name": "Libuše Stuňová · Účetnictví",
+  "short_name": "Stunova",
+  "description": "Účetní jako parťák, ne jen servis ke konci roku. Praha 4.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4ead4",
+  "theme_color": "#c8a867",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/stunova-logo.jpg",
+      "sizes": "1024x781",
+      "type": "image/jpeg"
+    }
+  ]
+}

@@ -23,6 +23,7 @@ import { MobileCTA } from "@/components/MobileCTA";
 import { FadeIn } from "@/components/FadeIn";
 import { FAQ } from "@/components/FAQ";
 import { PriceCalculator } from "@/components/Calculator";
+import { BackToTop } from "@/components/BackToTop";
 
 const logoUrl = "/stunova-logo.jpg";
 const logoTransparentUrl = "/stunova-logo-transparent.png";
@@ -588,6 +589,9 @@ function SiteFooter() {
           <a href="mailto:libuse@stunova.cz" className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">
             Kontakt
           </a>
+          <Link href="/ochrana-udaju" className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">
+            Ochrana údajů
+          </Link>
         </div>
       </div>
     </footer>
@@ -601,7 +605,7 @@ export default function Page() {
   return (
     <>
       <SiteNav />
-      <main>
+      <main id="main">
         <Hero />
         <TrustBar />
         <div className="hairline-x max-w-4xl mx-auto" />
@@ -621,6 +625,7 @@ export default function Page() {
       <SiteFooter />
       <CookieConsent />
       <MobileCTA />
+      <BackToTop />
     </>
   );
 }

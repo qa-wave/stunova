@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { UserButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { Logo } from "@/components/Logo";
 import { LayoutDashboard, FileText, Receipt, Calendar, LogOut } from "lucide-react";
+import { NotificationBell } from "@/components/NotificationBell";
 
 const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -70,6 +71,9 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         </nav>
 
         <div className="p-4 border-t border-[var(--gold)]/20">
+          <div className="hidden md:flex justify-end px-4 mb-2">
+            <NotificationBell />
+          </div>
           <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--card-bg)]/60 backdrop-blur-sm">
             {hasClerk ? (
               <UserButton appearance={{ elements: { avatarBox: "size-9" } }} />
@@ -94,9 +98,12 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
       <main className="flex-1 min-w-0 flex flex-col">
         <div className="md:hidden flex items-center justify-between px-4 py-4 border-b border-[var(--gold)]/20 bg-[var(--card-bg)]/60 backdrop-blur-xl">
           <Link href="/portal"><Logo size="xs" /></Link>
-          <Link href="/prihlaseni" className="flex items-center gap-1.5 text-xs text-[var(--gold-dark)]">
-            <LogOut className="w-3.5 h-3.5" /> Odhlásit
-          </Link>
+          <div className="flex items-center gap-2">
+            <NotificationBell />
+            <Link href="/prihlaseni" className="flex items-center gap-1.5 text-xs text-[var(--gold-dark)]">
+              <LogOut className="w-3.5 h-3.5" /> Odhlásit
+            </Link>
+          </div>
         </div>
 
         <div className="flex-1 p-6 md:p-10 pb-24 md:pb-10">{children}</div>

@@ -12,5 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/blog/co-potrebuji-od-ucetni`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/blog/datove-schranky-2026`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/blog/prechod-k-nove-ucetni`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/ochrana-udaju`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
   ];
 }
