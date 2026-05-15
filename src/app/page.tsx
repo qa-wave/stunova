@@ -15,6 +15,12 @@ import {
   Mail,
   CheckCircle,
   Quote,
+  Cloud,
+  Smartphone,
+  Upload,
+  FileText,
+  Scan,
+  Send,
 } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
 import { ContactForm } from "@/components/ContactForm";
@@ -481,12 +487,27 @@ function FAQSection() {
 }
 
 /* ============================================
-   ClientZone
+   ClientZone — všechny kanály pro doklady
    ============================================ */
-const channels = [
-  { icon: Camera, title: "Vyfoť doklad", desc: "Stačí fotka z mobilu. Pošli mailem nebo WhatsAppem a já to zpracuji." },
-  { icon: MessageCircle, title: "WhatsApp / telefon", desc: "Rychlý dotaz? Napiš nebo zavolej. Nemusíš čekat na schůzku." },
-  { icon: FolderOpen, title: "Sdílená složka", desc: "Google Drive nebo OneDrive — vše na jednom místě, přehledně a bezpečně." },
+const primaryChannels = [
+  { icon: Camera, title: "Fotka z mobilu", desc: "Vyfoť doklad a pošli mailem, WhatsAppem nebo přes iMessage. Stačí fotka — zbytek řeším já." },
+  { icon: Mail, title: "E-mail", desc: "Přepošli fakturu nebo naskenovaný doklad přímo na doklady@stunova.cz. Nejjednodušší cesta." },
+  { icon: MessageCircle, title: "WhatsApp", desc: "Pošli fotku dokladu nebo se na cokoliv zeptej. Odpovím většinou do pár hodin." },
+];
+
+const cloudChannels = [
+  { icon: FolderOpen, title: "Google Drive", desc: "Sdílená složka — nahraj doklady kdykoliv, já si je vyzvednu." },
+  { icon: Cloud, title: "Dropbox", desc: "Sdílený Dropbox folder pro pravidelné posílání dokladů." },
+  { icon: Cloud, title: "iCloud Drive", desc: "Pro uživatele Apple — sdílená složka přímo z Finderu nebo Files." },
+  { icon: FolderOpen, title: "OneDrive", desc: "Sdílený OneDrive folder — ideální pro firmy na Microsoft 365." },
+];
+
+const otherChannels = [
+  { icon: Scan, title: "Sken / PDF", desc: "Naskenovaný doklad v PDF — pošli mailem nebo nahraj do sdílené složky." },
+  { icon: Smartphone, title: "iMessage / SMS", desc: "Pošli fotku přes iMessage nebo MMS — zpracuji to stejně." },
+  { icon: Upload, title: "Klientský portál", desc: "Po přihlášení můžeš nahrát doklady přímo do svého portálu (připravujeme)." },
+  { icon: FileText, title: "Datová schránka", desc: "Doklady z datovky zpracuji automaticky — stačí mi dát přístup." },
+  { icon: Send, title: "Telegram / Signal", desc: "Preferuješ šifrovanou komunikaci? Pošli doklad přes Telegram nebo Signal." },
 ];
 
 function ClientZone() {
@@ -496,10 +517,14 @@ function ClientZone() {
         <div className="text-center mb-14">
           <p className="label-sm mb-3">Jak mi posíláš doklady</p>
           <h2 className="display text-3xl md:text-5xl">Klientská zóna</h2>
+          <p className="text-[var(--ink-soft)] mt-4 max-w-lg mx-auto">
+            Jak ti to vyhovuje. Fotka, e-mail, sdílená složka — vyber si kanál a doklady zpracuji.
+          </p>
         </div>
 
+        {/* Primary — 3 hlavní kanály */}
         <div className="grid md:grid-cols-3 gap-6 mb-10">
-          {channels.map((ch, i) => (
+          {primaryChannels.map((ch, i) => (
             <FadeIn key={ch.title} delay={i * 0.1} className="card-warm p-8 text-center">
               <div className="w-14 h-14 rounded-2xl bg-[var(--cream)] border border-[var(--gold)]/15 flex items-center justify-center mx-auto mb-5">
                 <ch.icon className="w-6 h-6 text-[var(--gold-dark)]" />
@@ -510,10 +535,53 @@ function ClientZone() {
           ))}
         </div>
 
+        {/* Cloud services */}
+        <div className="mb-8">
+          <p className="label-sm mb-4 text-center">Cloudová úložiště</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {cloudChannels.map((ch, i) => (
+              <FadeIn key={ch.title} delay={i * 0.05}>
+                <div className="card-warm p-5 flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--cream)] border border-[var(--gold)]/15 flex items-center justify-center shrink-0">
+                    <ch.icon className="w-4 h-4 text-[var(--gold-dark)]" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium mb-1">{ch.title}</h4>
+                    <p className="text-xs text-[var(--ink-soft)] leading-relaxed">{ch.desc}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+
+        {/* Other channels */}
+        <div className="mb-10">
+          <p className="label-sm mb-4 text-center">Další možnosti</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {otherChannels.map((ch, i) => (
+              <FadeIn key={ch.title} delay={i * 0.05}>
+                <div className="card-warm p-5 flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--cream)] border border-[var(--gold)]/15 flex items-center justify-center shrink-0">
+                    <ch.icon className="w-4 h-4 text-[var(--gold-dark)]" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium mb-1">{ch.title}</h4>
+                    <p className="text-xs text-[var(--ink-soft)] leading-relaxed">{ch.desc}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+
         <div className="text-center">
           <a href={`mailto:${CONTACT.dokladyEmail}`} className="btn-gold">
             <Mail className="w-4 h-4" /> {CONTACT.dokladyEmail}
           </a>
+          <p className="text-xs text-[var(--ink-soft)] mt-3">
+            Nevíš, co ti sedí nejlíp? Domluvíme se na kafíčku.
+          </p>
         </div>
       </div>
     </section>
