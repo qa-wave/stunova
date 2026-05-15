@@ -9,10 +9,10 @@ import { LayoutDashboard, FileText, Receipt, Calendar, LogOut } from "lucide-rea
 const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 const navItems = [
-  { href: "/portal", label: "Přehled", icon: LayoutDashboard },
-  { href: "/portal/dokumenty", label: "Dokumenty", icon: FileText },
-  { href: "/portal/faktury", label: "Faktury", icon: Receipt },
-  { href: "/portal/schuzky", label: "Schůzky", icon: Calendar },
+  { href: "/portal", label: "Přehled", icon: LayoutDashboard, badge: 0 },
+  { href: "/portal/dokumenty", label: "Dokumenty", icon: FileText, badge: 2 },
+  { href: "/portal/faktury", label: "Faktury", icon: Receipt, badge: 1 },
+  { href: "/portal/schuzky", label: "Schůzky", icon: Calendar, badge: 0 },
 ];
 
 function UserInfo() {
@@ -60,6 +60,11 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             >
               <item.icon className={`w-4 h-4 ${isActive(item.href) ? "text-[var(--gold)]" : "text-[var(--gold-dark)]"}`} />
               {item.label}
+              {item.badge > 0 && (
+                <span className="ml-auto text-[10px] font-medium bg-[var(--gold)] text-[var(--ink)] rounded-full w-5 h-5 flex items-center justify-center">
+                  {item.badge}
+                </span>
+              )}
             </Link>
           ))}
         </nav>
@@ -100,7 +105,12 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined}
               className={`flex-1 flex flex-col items-center gap-1 py-3 text-[10px] transition ${isActive(item.href) ? "text-[var(--ink)] font-medium" : "text-[var(--gold-dark)]"}`}>
-              <item.icon className={`w-5 h-5 ${isActive(item.href) ? "text-[var(--gold)]" : ""}`} />
+              <span className="relative">
+                <item.icon className={`w-5 h-5 ${isActive(item.href) ? "text-[var(--gold)]" : ""}`} />
+                {item.badge > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[var(--gold)]" />
+                )}
+              </span>
               {item.label}
             </Link>
           ))}

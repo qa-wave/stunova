@@ -9,10 +9,10 @@ import { LayoutDashboard, Users, Calendar, Receipt, LogOut } from "lucide-react"
 const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 const navItems = [
-  { href: "/admin", label: "Přehled", icon: LayoutDashboard },
-  { href: "/admin/klienti", label: "Klienti", icon: Users },
-  { href: "/admin/schuzky", label: "Schůzky", icon: Calendar },
-  { href: "/admin/faktury", label: "Fakturace", icon: Receipt },
+  { href: "/admin", label: "Přehled", icon: LayoutDashboard, badge: 0 },
+  { href: "/admin/klienti", label: "Klienti", icon: Users, badge: 0 },
+  { href: "/admin/schuzky", label: "Schůzky", icon: Calendar, badge: 3 },
+  { href: "/admin/faktury", label: "Fakturace", icon: Receipt, badge: 2 },
 ];
 
 function UserInfo() {
@@ -46,6 +46,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition ${isActive(item.href) ? "bg-[var(--gold)]/15 font-medium text-[var(--cream)]" : "hover:bg-[var(--gold)]/10"}`}>
               <item.icon className={`w-4 h-4 ${isActive(item.href) ? "text-[var(--gold-light)]" : "text-[var(--gold)]"}`} />
               {item.label}
+              {item.badge > 0 && (
+                <span className="ml-auto text-[10px] font-medium bg-[var(--gold)] text-[var(--ink)] rounded-full w-5 h-5 flex items-center justify-center">
+                  {item.badge}
+                </span>
+              )}
             </Link>
           ))}
         </nav>
@@ -86,7 +91,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined}
               className={`flex-1 flex flex-col items-center gap-1 py-3 text-[10px] transition ${isActive(item.href) ? "text-[var(--cream)] font-medium" : "text-[var(--gold)]"}`}>
-              <item.icon className={`w-5 h-5 ${isActive(item.href) ? "text-[var(--gold-light)]" : ""}`} />
+              <span className="relative">
+                <item.icon className={`w-5 h-5 ${isActive(item.href) ? "text-[var(--gold-light)]" : ""}`} />
+                {item.badge > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[var(--gold)]" />
+                )}
+              </span>
               {item.label}
             </Link>
           ))}

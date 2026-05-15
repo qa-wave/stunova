@@ -22,6 +22,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { MobileCTA } from "@/components/MobileCTA";
 import { FadeIn } from "@/components/FadeIn";
 import { FAQ } from "@/components/FAQ";
+import { PriceCalculator } from "@/components/Calculator";
 
 const logoUrl = "/stunova-logo.jpg";
 const logoTransparentUrl = "/stunova-logo-transparent.png";
@@ -303,9 +304,16 @@ function Pricing() {
           ))}
         </div>
 
-        <p className="text-center text-xs text-[var(--ink-soft)] mt-8">
+        <p className="text-center text-xs text-[var(--ink-soft)] mt-8 mb-12">
           Ceny jsou orientační bez DPH. Přesnou nabídku ti dám po prvním kafíčku.
         </p>
+
+        {/* Calculator */}
+        <div className="max-w-lg mx-auto">
+          <FadeIn>
+            <PriceCalculator />
+          </FadeIn>
+        </div>
       </div>
     </section>
   );
@@ -571,6 +579,9 @@ function SiteFooter() {
           <span className="text-sm text-[var(--sand)]">© 2026 Libuše Stuňová</span>
         </div>
         <div className="flex items-center gap-6 text-sm">
+          <Link href="/blog" className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">
+            Blog
+          </Link>
           <Link href="/prihlaseni" className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">
             Klientský portál
           </Link>

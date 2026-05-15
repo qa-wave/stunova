@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, Send, Coffee } from "lucide-react";
+import { Mail, Phone, Send, Coffee, MessageCircle, Calendar } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
+
+const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL;
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -96,9 +98,31 @@ export function ContactForm() {
 
       <FadeIn delay={0.15}>
         <div className="space-y-6">
+          {/* Calendly */}
+          {CALENDLY_URL && (
+            <div>
+              <p className="text-xs uppercase tracking-widest text-[var(--gold-light)] mb-3">
+                Rezervuj si termín
+              </p>
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 py-3 px-5 rounded-xl bg-[var(--gold)]/10 border border-[var(--gold)]/25 text-[var(--cream)] hover:bg-[var(--gold)]/15 transition"
+              >
+                <Calendar className="w-5 h-5 text-[var(--gold)]" />
+                <div>
+                  <span className="text-sm font-medium">Vybrat termín online</span>
+                  <span className="block text-xs text-[var(--sand)]">30 min · zdarma · Google Meet nebo osobně</span>
+                </div>
+              </a>
+            </div>
+          )}
+
+          {/* Direct contact */}
           <div>
             <p className="text-xs uppercase tracking-widest text-[var(--gold-light)] mb-3">
-              Nebo napiš přímo
+              {CALENDLY_URL ? "Nebo napiš přímo" : "Nebo napiš přímo"}
             </p>
             <a
               href="mailto:libuse@stunova.cz"
@@ -114,8 +138,18 @@ export function ContactForm() {
               <Phone className="w-5 h-5 text-[var(--gold)]" />
               <span>+420 728 ••• •••</span>
             </a>
+            {/* WhatsApp — mobilní konverze */}
+            <a
+              href="https://wa.me/420728000000?text=Dobr%C3%BD%20den%2C%20zaj%C3%ADm%C3%A1m%20se%20o%20%C3%BA%C4%8Detn%C3%AD%20slu%C5%BEby."
+              className="flex items-center gap-3 py-2 text-[var(--cream)] hover:text-[var(--gold-light)] transition"
+            >
+              <MessageCircle className="w-5 h-5 text-[var(--gold)]" />
+              <span>WhatsApp</span>
+            </a>
           </div>
+
           <div className="hairline-x opacity-30" />
+
           <div>
             <p className="text-xs uppercase tracking-widest text-[var(--gold-light)] mb-3">
               Kde se setkáme
@@ -126,6 +160,7 @@ export function ContactForm() {
               Po–Pá 9:00–17:00
             </p>
           </div>
+
           <div className="hairline-x opacity-30" />
           <p className="text-xs text-[var(--sand)]/60">
             Odpovím do 24 hodin v pracovní dny. Garantuji.

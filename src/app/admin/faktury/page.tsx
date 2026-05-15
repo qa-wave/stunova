@@ -117,6 +117,9 @@ export default function AdminFaktury() {
           </p>
           <p className="display text-3xl">1 600 000 Kč</p>
           <p className="text-xs text-[var(--ink-soft)] mt-1">35 % splněno</p>
+          <div className="mt-3 h-2 rounded-full bg-[var(--sand)]">
+            <div className="h-2 rounded-full bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)]" style={{ width: "35%" }} />
+          </div>
         </div>
       </div>
 

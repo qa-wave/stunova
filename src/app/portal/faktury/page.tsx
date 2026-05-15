@@ -115,10 +115,10 @@ export default function PortalFaktury() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <a
-                    href="#"
+                    href={`/portal/faktury/${f.cislo.replace(/\//g, "-")}`}
                     className="text-[var(--gold-dark)] hover:text-[var(--ink)] text-xs"
                   >
-                    Stáhnout
+                    Detail →
                   </a>
                 </td>
               </tr>

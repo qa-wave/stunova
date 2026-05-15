@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "@/components/AuthProvider";
 import "./globals.css";
 
@@ -38,6 +39,42 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  name: "Libuše Stuňová · Účetnictví",
+  description:
+    "Účetní jako parťák, ne jen servis ke konci roku. Vedení účetnictví, daňová evidence a mzdy pro malé firmy a OSVČ v Praze.",
+  url: "https://stunova.qawave.ai",
+  logo: "https://stunova.qawave.ai/stunova-logo.jpg",
+  image: "https://stunova.qawave.ai/stunova-logo.jpg",
+  telephone: "+420728000000",
+  email: "libuse@stunova.cz",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Praha 4",
+    addressRegion: "Praha",
+    addressCountry: "CZ",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 50.0596,
+    longitude: 14.4384,
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Praha",
+  },
+  priceRange: "od 2 500 Kč/měs",
+  openingHours: "Mo-Fr 09:00-17:00",
+  sameAs: [],
+  founder: {
+    "@type": "Person",
+    name: "Libuše Stuňová",
+    jobTitle: "Účetní",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,8 +85,15 @@ export default function RootLayout({
       lang="cs"
       className={`${fraunces.variable} ${inter.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <AuthProvider>{children}</AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
