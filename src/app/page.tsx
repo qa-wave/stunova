@@ -30,6 +30,8 @@ import { FadeIn } from "@/components/FadeIn";
 import { FAQ } from "@/components/FAQ";
 import { PriceCalculator } from "@/components/Calculator";
 import { BackToTop } from "@/components/BackToTop";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { Newsletter } from "@/components/Newsletter";
 import { BRAND, CONTACT } from "@/lib/constants";
 
 const logoUrl = BRAND.logo;
@@ -106,15 +108,17 @@ function Hero() {
             </a>
           </div>
 
-          {/* Stats inline — nad fold */}
+          {/* Stats inline — nad fold, animated */}
           <div className="flex justify-center gap-8 pt-8 border-t border-[var(--gold)]/15">
             {[
-              { v: "14+", l: "let praxe" },
-              { v: "23", l: "aktivních klientů" },
-              { v: "0", l: "pokut od FÚ" },
+              { v: 14, suffix: "+", l: "let praxe" },
+              { v: 23, suffix: "", l: "aktivních klientů" },
+              { v: 0, suffix: "", l: "pokut od FÚ" },
             ].map((s) => (
               <div key={s.l} className="text-center">
-                <p className="display text-2xl md:text-3xl gold-grad">{s.v}</p>
+                <p className="display text-2xl md:text-3xl gold-grad">
+                  <AnimatedCounter value={s.v} suffix={s.suffix} />
+                </p>
                 <p className="text-xs uppercase tracking-wide text-[var(--ink-soft)] mt-1">{s.l}</p>
               </div>
             ))}
@@ -481,6 +485,11 @@ function FAQSection() {
           <p className="text-[var(--ink-soft)] mt-4">Tady jsou ty nejčastější. Nezodpovězené? Napiš mi.</p>
         </div>
         <FAQ />
+
+        {/* Newsletter */}
+        <div className="mt-16">
+          <Newsletter />
+        </div>
       </div>
     </section>
   );

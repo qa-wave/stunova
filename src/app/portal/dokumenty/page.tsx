@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-
 const dokumenty = [
   {
     typ: "Ke schválení",
@@ -106,9 +104,8 @@ export default function PortalDokumenty() {
           </p>
         ) : (
           filtrovaneDokumenty.map((m) => (
-            <Link
+            <div
               key={m.t}
-              href="#"
               className="group bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6 shadow-md shadow-[var(--gold)]/5 hover:-translate-y-0.5 hover:shadow-xl transition relative focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
             >
               {m.novy && (
@@ -127,7 +124,7 @@ export default function PortalDokumenty() {
                 <span>{m.aut}</span>
                 <span>{m.cas}</span>
               </div>
-            </Link>
+            </div>
           ))
         )}
       </div>

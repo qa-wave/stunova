@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { ArrowLeft } from "lucide-react";
+import { ReadingProgress } from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
   title: {
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen">
+      <ReadingProgress />
       <nav className="px-6 md:px-12 py-6 flex items-center justify-between max-w-4xl mx-auto">
         <Link href="/">
           <Logo size="sm" />

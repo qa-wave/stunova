@@ -6,6 +6,7 @@ import { UserButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { Logo } from "@/components/Logo";
 import { LayoutDashboard, FileText, Receipt, Calendar, LogOut } from "lucide-react";
 import { NotificationBell } from "@/components/NotificationBell";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -106,7 +107,10 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
           </div>
         </div>
 
-        <div className="flex-1 p-6 md:p-10 pb-24 md:pb-10">{children}</div>
+        <div className="flex-1 p-6 md:p-10 pb-24 md:pb-10">
+          <Breadcrumbs />
+          {children}
+        </div>
 
         <nav aria-label="Portál mobilní" className="md:hidden fixed bottom-0 inset-x-0 bg-[var(--card-bg)]/90 backdrop-blur-xl border-t border-[var(--gold)]/20 flex z-50" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
           {navItems.map((item) => (

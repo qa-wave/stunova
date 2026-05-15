@@ -92,7 +92,7 @@ export default function AdminKlienti() {
             className="bg-white/80 border border-[var(--gold)]/30 rounded-full px-5 py-2.5 text-sm focus:outline-none focus:border-[var(--gold)] w-48 md:w-64"
           />
           <Link
-            href="#"
+            href="/admin/klienti/novy"
             className="rounded-full px-5 py-2.5 text-sm text-white"
             style={{
               background: "linear-gradient(135deg, var(--gold) 0%, var(--ink) 100%)",
@@ -107,7 +107,7 @@ export default function AdminKlienti() {
         {klienti.map((k) => (
           <Link
             key={k.nazev}
-            href="#"
+            href={`/admin/klienti/${k.nazev.toLowerCase().replace(/\s+/g, "-").replace(/[.]/g, "")}`}
             className="group bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-6 shadow-md shadow-[var(--gold)]/5 hover:-translate-y-0.5 hover:shadow-xl transition"
           >
             <div className="flex items-start gap-4 mb-4">

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Download, CreditCard } from "lucide-react";
+import { ArrowLeft, CreditCard } from "lucide-react";
+import { FakturaActions } from "./faktura-actions";
 
 export const metadata: Metadata = {
   title: "Detail faktury",
@@ -158,16 +159,7 @@ export default async function FakturaDetail({
         )}
 
         {/* Actions */}
-        <div className="mt-8 flex flex-wrap gap-3">
-          <button className="btn-soft">
-            <Download className="w-4 h-4" /> Stáhnout PDF
-          </button>
-          {isUnpaid && (
-            <button className="btn-gold">
-              Označit jako zaplaceno
-            </button>
-          )}
-        </div>
+        <FakturaActions isUnpaid={isUnpaid} />
       </div>
     </div>
   );

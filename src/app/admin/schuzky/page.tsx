@@ -135,7 +135,7 @@ export default function AdminSchuzky() {
                     </div>
                     <div className="md:col-span-3 text-right">
                       <Link
-                        href="#"
+                        href="/admin/klienti"
                         className="text-xs text-[var(--gold-dark)] hover:text-[var(--ink)]"
                       >
                         Příprava →

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { UserButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { Logo } from "@/components/Logo";
 import { LayoutDashboard, Users, Calendar, Receipt, LogOut } from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -85,7 +86,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
         </div>
 
-        <div className="flex-1 p-6 md:p-10 pb-24 md:pb-10">{children}</div>
+        <div className="flex-1 p-6 md:p-10 pb-24 md:pb-10">
+          <Breadcrumbs />
+          {children}
+        </div>
 
         <nav aria-label="Admin mobilní" className="md:hidden fixed bottom-0 inset-x-0 bg-[var(--ink)]/95 backdrop-blur-xl border-t border-[var(--gold)]/30 flex z-50" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
           {navItems.map((item) => (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RelatedArticles } from "@/components/RelatedArticles";
+import { ShareButtons } from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "Co potřebuji od účetní? Průvodce pro OSVČ a malé firmy",
@@ -83,6 +84,7 @@ export default function Article() {
           </Link>
         </div>
 
+        <ShareButtons title="Co potřebuji od účetní?" slug="co-potrebuji-od-ucetni" />
         <RelatedArticles currentSlug="co-potrebuji-od-ucetni" />
       </div>
     </article>

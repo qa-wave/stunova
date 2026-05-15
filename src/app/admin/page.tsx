@@ -108,7 +108,7 @@ export default function AdminDashboard() {
                     </span>
                   ) : (
                     <Link
-                      href="#"
+                      href="/admin/schuzky"
                       className="text-xs text-[var(--gold-dark)] hover:text-[var(--ink)]"
                     >
                       Otevřít →
@@ -134,7 +134,7 @@ export default function AdminDashboard() {
                 a poslat ke schválení.
               </p>
               <Link
-                href="#"
+                href="/admin/faktury"
                 className="text-xs text-[var(--gold-dark)] hover:text-[var(--ink)] underline underline-offset-4"
               >
                 Otevřít →

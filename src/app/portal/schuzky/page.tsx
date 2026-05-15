@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CONTACT } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Schůzky",
@@ -64,7 +65,7 @@ export default function PortalSchuzky() {
           <h1 className="display text-4xl md:text-5xl">Schůzky</h1>
         </div>
         <Link
-          href="#"
+          href={`mailto:${CONTACT.email}?subject=${encodeURIComponent("Nový termín schůzky")}`}
           className="rounded-full px-5 py-3 text-sm bg-white/80 border border-[var(--gold)]/30 hover:bg-white transition"
         >
           + Domluvit nový termín
@@ -95,14 +96,13 @@ export default function PortalSchuzky() {
                 <p className="text-sm">{s.poznamky}</p>
               </div>
               <div className="md:col-span-3 flex md:justify-end gap-2">
-                <Link
-                  href="#"
-                  className="text-xs text-[var(--gold-dark)] hover:text-[var(--ink)] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-[var(--gold)]"
+                <span
+                  className="text-xs text-[var(--gold-dark)] underline underline-offset-4 cursor-default"
                 >
                   {s.stav === "naplanovane"
                     ? "Detail / přesunout →"
                     : "Otevřít zápis →"}
-                </Link>
+                </span>
               </div>
             </div>
           </li>
