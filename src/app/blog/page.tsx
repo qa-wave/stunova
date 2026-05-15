@@ -2,35 +2,30 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
+import { ARTICLES } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Blog",
   description: "Praktické tipy k účetnictví, daním a podnikání.",
 };
 
-const articles = [
-  {
-    slug: "co-potrebuji-od-ucetni",
-    title: "Co potřebuji od účetní? Průvodce pro OSVČ a malé firmy",
-    excerpt: "Nevíš, co od účetní čekat? Sepsal jsem seznam věcí, které by měla řešit — a které ne.",
-    date: "15. května 2026",
-    readTime: "5 min",
-  },
-  {
-    slug: "datove-schranky-2026",
-    title: "Datové schránky v roce 2026: co se změnilo a co musíš vědět",
-    excerpt: "Od ledna 2023 mají datovky i OSVČ. Co to znamená pro tebe a jak s tím pracovat?",
-    date: "10. května 2026",
-    readTime: "4 min",
-  },
-  {
-    slug: "prechod-k-nove-ucetni",
-    title: "Jak bezbolestně přejít k nové účetní",
-    excerpt: "Měníš účetní a bojíš se chaosu? Tady je návod krok za krokem, co připravit a na co si dát pozor.",
-    date: "5. května 2026",
-    readTime: "6 min",
-  },
-];
+/** Format ISO date to Czech display format */
+function formatDate(iso: string) {
+  const d = new Date(iso);
+  const months = [
+    "ledna", "února", "března", "dubna", "května", "června",
+    "července", "srpna", "září", "října", "listopadu", "prosince",
+  ];
+  return `${d.getUTCDate()}. ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+}
+
+const articles = ARTICLES.map((a) => ({
+  slug: a.slug,
+  title: a.title,
+  excerpt: a.excerpt,
+  date: formatDate(a.date),
+  readTime: a.readTime,
+}));
 
 export default function BlogIndex() {
   return (

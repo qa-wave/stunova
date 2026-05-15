@@ -24,9 +24,10 @@ import { FadeIn } from "@/components/FadeIn";
 import { FAQ } from "@/components/FAQ";
 import { PriceCalculator } from "@/components/Calculator";
 import { BackToTop } from "@/components/BackToTop";
+import { BRAND, CONTACT } from "@/lib/constants";
 
-const logoUrl = "/stunova-logo.jpg";
-const logoTransparentUrl = "/stunova-logo-transparent.png";
+const logoUrl = BRAND.logo;
+const logoTransparentUrl = BRAND.logoTransparent;
 
 /* ============================================
    Hero
@@ -510,8 +511,8 @@ function ClientZone() {
         </div>
 
         <div className="text-center">
-          <a href="mailto:doklady@stunova.cz" className="btn-gold">
-            <Mail className="w-4 h-4" /> doklady@stunova.cz
+          <a href={`mailto:${CONTACT.dokladyEmail}`} className="btn-gold">
+            <Mail className="w-4 h-4" /> {CONTACT.dokladyEmail}
           </a>
         </div>
       </div>
@@ -586,7 +587,7 @@ function SiteFooter() {
           <Link href="/prihlaseni" className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">
             Klientský portál
           </Link>
-          <a href="mailto:libuse@stunova.cz" className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">
+          <a href={`mailto:${CONTACT.email}`} className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">
             Kontakt
           </a>
           <Link href="/ochrana-udaju" className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">

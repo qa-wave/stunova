@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "@/components/AuthProvider";
+import { BRAND, CONTACT } from "@/lib/constants";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -42,14 +43,13 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "AccountingService",
-  name: "Libuše Stuňová · Účetnictví",
-  description:
-    "Účetní jako parťák, ne jen servis ke konci roku. Vedení účetnictví, daňová evidence a mzdy pro malé firmy a OSVČ v Praze.",
-  url: "https://stunova.qawave.ai",
-  logo: "https://stunova.qawave.ai/stunova-logo.jpg",
-  image: "https://stunova.qawave.ai/stunova-logo.jpg",
-  telephone: "+420728000000",
-  email: "libuse@stunova.cz",
+  name: BRAND.title,
+  description: `${BRAND.tagline} Vedení účetnictví, daňová evidence a mzdy pro malé firmy a OSVČ v Praze.`,
+  url: BRAND.url,
+  logo: `${BRAND.url}${BRAND.logo}`,
+  image: `${BRAND.url}${BRAND.logo}`,
+  telephone: CONTACT.phone,
+  email: CONTACT.email,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Praha 4",
@@ -70,7 +70,7 @@ const jsonLd = {
   sameAs: [],
   founder: {
     "@type": "Person",
-    name: "Libuše Stuňová",
+    name: BRAND.name,
     jobTitle: "Účetní",
   },
 };

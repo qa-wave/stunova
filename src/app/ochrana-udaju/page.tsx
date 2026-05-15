@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { ArrowLeft } from "lucide-react";
+import { CONTACT } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Ochrana osobních údajů",
@@ -26,7 +27,7 @@ export default function PrivacyPage() {
             <h2 className="text-[var(--ink)] font-medium text-base mb-3">1. Správce údajů</h2>
             <p>
               Libuše Stuňová, IČO: [doplnit], se sídlem Praha 4 – Nusle.
-              E-mail: libuse@stunova.cz. Telefon: +420 728 ••• •••.
+              E-mail: {CONTACT.email}. Telefon: {CONTACT.phoneDisplay}.
             </p>
           </section>
 
@@ -65,7 +66,7 @@ export default function PrivacyPage() {
             <h2 className="text-[var(--ink)] font-medium text-base mb-3">5. Tvoje práva</h2>
             <p>
               Máš právo na přístup ke svým údajům, jejich opravu, výmaz, omezení zpracování,
-              přenositelnost a právo vznést námitku. Kontaktuj mě na libuse@stunova.cz.
+              přenositelnost a právo vznést námitku. Kontaktuj mě na {CONTACT.email}.
             </p>
             <p className="mt-2">
               Máš také právo podat stížnost u Úřadu pro ochranu osobních údajů (uoou.cz).

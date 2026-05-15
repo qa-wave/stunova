@@ -23,6 +23,8 @@ export const publicRoutes = [
 ];
 
 /** Emails that can access /admin/* */
+import { CONTACT } from "./constants";
+
 export const adminEmails = [
-  "libuse@stunova.cz",
+  CONTACT.email,
 ];

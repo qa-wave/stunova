@@ -1,19 +1,7 @@
 import Link from "next/link";
+import { ARTICLES } from "@/lib/constants";
 
-const allArticles = [
-  {
-    slug: "co-potrebuji-od-ucetni",
-    title: "Co potřebuji od účetní?",
-  },
-  {
-    slug: "datove-schranky-2026",
-    title: "Datové schránky v roce 2026",
-  },
-  {
-    slug: "prechod-k-nove-ucetni",
-    title: "Jak přejít k nové účetní",
-  },
-];
+const allArticles = ARTICLES.map((a) => ({ slug: a.slug, title: a.title }));
 
 export function RelatedArticles({ currentSlug }: { currentSlug: string }) {
   const others = allArticles.filter((a) => a.slug !== currentSlug);

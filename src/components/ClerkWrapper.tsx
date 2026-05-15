@@ -8,6 +8,8 @@ export default function ClerkWrapper({ children }: { children: ReactNode }) {
   return (
     <ClerkProvider
       localization={csCZ}
+      // Clerk's appearance API doesn't support CSS custom properties,
+      // so oklch values must be raw literals (not var(--gold-dark) etc.).
       appearance={{
         variables: {
           colorPrimary: "oklch(0.566 0.082 67.5)",

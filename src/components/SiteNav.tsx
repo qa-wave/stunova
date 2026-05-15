@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { BRAND } from "@/lib/constants";
 
-const logoUrl = "/stunova-logo.jpg";
+const logoUrl = BRAND.logo;
 
 const navLinks = [
   ["Služby", "#sluzby"],

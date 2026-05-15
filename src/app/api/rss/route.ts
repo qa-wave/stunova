@@ -1,25 +1,13 @@
-const BASE = "https://stunova.qawave.ai";
+import { BRAND, ARTICLES } from "@/lib/constants";
 
-const articles = [
-  {
-    slug: "co-potrebuji-od-ucetni",
-    title: "Co potřebuji od účetní? Průvodce pro OSVČ a malé firmy",
-    description: "Nevíš, co od účetní čekat? Seznam věcí, které by měla řešit — a které ne.",
-    date: "2026-05-15",
-  },
-  {
-    slug: "datove-schranky-2026",
-    title: "Datové schránky v roce 2026: co se změnilo a co musíš vědět",
-    description: "Od ledna 2023 mají datovky i OSVČ. Co to znamená a jak s tím pracovat?",
-    date: "2026-05-10",
-  },
-  {
-    slug: "prechod-k-nove-ucetni",
-    title: "Jak bezbolestně přejít k nové účetní",
-    description: "Měníš účetní a bojíš se chaosu? Návod krok za krokem.",
-    date: "2026-05-05",
-  },
-];
+const BASE = BRAND.url;
+
+const articles = ARTICLES.map((a) => ({
+  slug: a.slug,
+  title: a.title,
+  description: a.excerpt,
+  date: a.date,
+}));
 
 function escapeXml(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

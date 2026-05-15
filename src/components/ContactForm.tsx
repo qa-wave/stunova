@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Mail, Phone, Send, Coffee, MessageCircle, Calendar } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
+import { CONTACT } from "@/lib/constants";
 
 const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL;
 
@@ -28,7 +29,7 @@ export function ContactForm() {
       const name = data.get("name") as string;
       const email = data.get("email") as string;
       const message = data.get("message") as string;
-      window.location.href = `mailto:libuse@stunova.cz?subject=Kafíčko – ${name}&body=${encodeURIComponent(message)}%0A%0AOdpovědět na: ${email}`;
+      window.location.href = `mailto:${CONTACT.email}?subject=Kafíčko – ${name}&body=${encodeURIComponent(message)}%0A%0AOdpovědět na: ${email}`;
     }
 
     setSending(false);
@@ -122,25 +123,25 @@ export function ContactForm() {
           {/* Direct contact */}
           <div>
             <p className="text-xs uppercase tracking-widest text-[var(--gold-light)] mb-3">
-              {CALENDLY_URL ? "Nebo napiš přímo" : "Nebo napiš přímo"}
+              Nebo napiš přímo
             </p>
             <a
-              href="mailto:libuse@stunova.cz"
+              href={`mailto:${CONTACT.email}`}
               className="flex items-center gap-3 py-2 text-[var(--cream)] hover:text-[var(--gold-light)] transition"
             >
               <Mail className="w-5 h-5 text-[var(--gold)]" />
-              <span>libuse@stunova.cz</span>
+              <span>{CONTACT.email}</span>
             </a>
             <a
-              href="tel:+420728000000"
+              href={`tel:${CONTACT.phone}`}
               className="flex items-center gap-3 py-2 text-[var(--cream)] hover:text-[var(--gold-light)] transition"
             >
               <Phone className="w-5 h-5 text-[var(--gold)]" />
-              <span>+420 728 ••• •••</span>
+              <span>{CONTACT.phoneDisplay}</span>
             </a>
             {/* WhatsApp — mobilní konverze */}
             <a
-              href="https://wa.me/420728000000?text=Dobr%C3%BD%20den%2C%20zaj%C3%ADm%C3%A1m%20se%20o%20%C3%BA%C4%8Detn%C3%AD%20slu%C5%BEby."
+              href={CONTACT.whatsappUrl}
               className="flex items-center gap-3 py-2 text-[var(--cream)] hover:text-[var(--gold-light)] transition"
             >
               <MessageCircle className="w-5 h-5 text-[var(--gold)]" />
@@ -155,9 +156,9 @@ export function ContactForm() {
               Kde se setkáme
             </p>
             <p className="text-sm text-[var(--sand)]">
-              Praha 4 · Nusle<br />
+              {CONTACT.address}<br />
               Schůzky osobně i online (Google Meet)<br />
-              Po–Pá 9:00–17:00
+              {CONTACT.hours}
             </p>
           </div>
 

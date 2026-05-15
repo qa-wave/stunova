@@ -290,13 +290,6 @@
   100% { transform: translateY(-200px); opacity: 0; }
 }
 
-.fade-up { animation: fadeUp 0.8s ease-out both; }
-.fade-up-1 { animation: fadeUp 0.8s ease-out 0.1s both; }
-.fade-up-2 { animation: fadeUp 0.8s ease-out 0.2s both; }
-.fade-up-3 { animation: fadeUp 0.8s ease-out 0.3s both; }
-.fade-up-4 { animation: fadeUp 0.8s ease-out 0.4s both; }
-.fade-up-5 { animation: fadeUp 0.8s ease-out 0.5s both; }
-
 /* ============================================
    Variant: Warm (portal/admin)
    ============================================ */
@@ -314,13 +307,6 @@
   letter-spacing: -0.02em;
   font-style: italic;
 }
-.variant-warm .gold-grad {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 /* ============================================
    Variant: Galerie (preserved)
    ============================================ */

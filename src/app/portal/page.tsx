@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CONTACT } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Přehled",
@@ -22,7 +23,7 @@ export default function PortalDashboard() {
           <p className="text-xs text-[var(--ink-soft)]">
             Tady najdeš přehled svého účetnictví, dokumenty ke schválení, faktury a historii schůzek.
             Pokud potřebuješ cokoliv — stačí napsat na{" "}
-            <a href="mailto:libuse@stunova.cz" className="text-[var(--gold-dark)] underline underline-offset-2">libuse@stunova.cz</a>.
+            <a href={`mailto:${CONTACT.email}`} className="text-[var(--gold-dark)] underline underline-offset-2">{CONTACT.email}</a>.
           </p>
         </div>
       </div>
