@@ -20,11 +20,12 @@ test.describe("Landing page", () => {
     await expect(page.locator("h1")).toContainText("nestresuješ");
   });
 
-  test("pricing section has 3 plans", async ({ page }) => {
+  test("pricing section has 3 plan cards + calculator", async ({ page }) => {
     const pricingSection = page.locator("#cenik");
     await expect(pricingSection).toBeVisible();
+    // 3 plan cards + 1 calculator card = 4 card-warm elements
     const cards = pricingSection.locator(".card-warm");
-    await expect(cards).toHaveCount(3);
+    await expect(cards).toHaveCount(4);
   });
 
   test("FAQ accordion opens and closes", async ({ page }) => {
@@ -79,7 +80,7 @@ test.describe("SEO", () => {
 
   test("has favicon", async ({ page }) => {
     await page.goto("/");
-    const favicon = await page.locator('link[rel="icon"]').getAttribute("href");
+    const favicon = await page.locator('link[rel="icon"]').first().getAttribute("href");
     expect(favicon).toBeTruthy();
   });
 });
