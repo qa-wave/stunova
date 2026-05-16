@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   description:
     "Účetní jako parťák, ne jen servis ke konci roku. Praha 4. Domluvíme si kafíčko.",
   metadataBase: new URL("https://stunova.qawave.ai"),
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": "/api/rss" },
+  },
   openGraph: {
     type: "website",
     locale: "cs_CZ",
@@ -92,6 +96,8 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/manifest.json" />
         <link rel="alternate" type="application/rss+xml" title="Blog · Libuše Stuňová" href="/api/rss" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="theme-color" content="#c8a867" />
       </head>
       <body>

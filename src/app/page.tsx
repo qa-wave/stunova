@@ -14,7 +14,6 @@ import {
   MessageCircle,
   Mail,
   CheckCircle,
-  Quote,
   Cloud,
   Smartphone,
   Upload,
@@ -25,11 +24,13 @@ import {
 import { SiteNav } from "@/components/SiteNav";
 import { ContactForm } from "@/components/ContactForm";
 import { CookieConsent } from "@/components/CookieConsent";
+import { CookieReset } from "@/components/CookieReset";
 import { MobileCTA } from "@/components/MobileCTA";
 import { FadeIn } from "@/components/FadeIn";
 import { FAQ } from "@/components/FAQ";
 import { PriceCalculator } from "@/components/Calculator";
 import { BackToTop } from "@/components/BackToTop";
+import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { Newsletter } from "@/components/Newsletter";
 import { BRAND, CONTACT } from "@/lib/constants";
@@ -381,24 +382,6 @@ function Process() {
 /* ============================================
    Dark Island — Testimonials
    ============================================ */
-const testimonials = [
-  {
-    quote: "Konečně vím, kde jsem. Každý měsíc dostanu report, rozumím mu a nemusím nic hlídat.",
-    name: "Martin K.",
-    role: "e-shop, s.r.o.",
-  },
-  {
-    quote: "Bála jsem se daňového přiznání každý rok. Libuše mi jednou vysvětlila, co a proč, a od té doby mi to vlastně dává smysl.",
-    name: "Petra V.",
-    role: "grafička, OSVČ",
-  },
-  {
-    quote: "Přešli jsme od velké účetní firmy. Tady odpověď přijde za hodinu, ne za dny.",
-    name: "Jakub M.",
-    role: "IT konzultant, 3 zaměstnanci",
-  },
-];
-
 function Testimonials() {
   return (
     <section className="py-28 px-6" style={{ background: "oklch(0.215 0.030 55)" }}>
@@ -407,23 +390,7 @@ function Testimonials() {
           <p className="text-xs uppercase tracking-[0.15em] text-[var(--gold)] mb-3">Reference</p>
           <h2 className="display text-3xl md:text-5xl text-[var(--cream)]">Slovo mých klientů</h2>
         </div>
-
-        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 md:grid md:grid-cols-3 md:overflow-visible md:mx-0 md:px-0">
-          {testimonials.map((t, i) => (
-            <FadeIn key={t.name} delay={i * 0.1} className="min-w-[300px] snap-start md:min-w-0 flex-shrink-0">
-              <div className="bg-[var(--gold)]/5 border border-[var(--gold)]/15 rounded-2xl p-8 h-full">
-                <Quote className="w-8 h-8 text-[var(--gold)]/40 mb-4" aria-hidden="true" />
-                <p className="text-[var(--cream)] leading-relaxed mb-6">
-                  "{t.quote}"
-                </p>
-                <div>
-                  <p className="text-sm font-medium text-[var(--cream)]">{t.name}</p>
-                  <p className="text-xs text-[var(--sand)]">{t.role}</p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+        <TestimonialCarousel />
       </div>
     </section>
   );
@@ -670,6 +637,7 @@ function SiteFooter() {
           <Link href="/ochrana-udaju" className="py-2 text-[var(--sand)] hover:text-[var(--cream)] transition">
             Ochrana údajů
           </Link>
+          <CookieReset />
         </div>
       </div>
     </footer>

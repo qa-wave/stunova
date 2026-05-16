@@ -156,16 +156,15 @@ export default function AdminFaktury() {
                   </span>
                 </td>
                 <td className="px-6 py-4 text-right">
-                  <a
-                    href="#"
-                    className="text-[var(--gold-dark)] hover:text-[var(--ink)] text-xs"
+                  <span
+                    className="cursor-pointer text-[var(--gold-dark)] hover:text-[var(--ink)] text-xs transition-colors"
                   >
                     {f.stav === "k_vystaveni"
                       ? "Vystavit →"
                       : f.stav === "k_uhrade"
                         ? "Připomenout"
                         : "PDF"}
-                  </a>
+                  </span>
                 </td>
               </tr>
             ))}
