@@ -1,4 +1,4 @@
 #!/bin/bash
-# Otevře fedicfinance-app v Claude Code s plným kontextem
-cd /Users/tm/workspaces/projects/fedicfinance-app
+# Opens this project in Claude Code.
+cd /Users/tm/workspaces/projects/stunova
 claude
